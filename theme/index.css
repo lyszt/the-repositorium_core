@@ -1,6 +1,350 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Instrument+Serif:ital@0;1&display=swap");
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── Tesserae design tokens ─────────────────────────────────────────── */
 :root {
-  /* Example brand color overrides for the custom theme scaffold. */
-  --rp-c-brand: #0f766e;
-  --rp-c-brand-dark: #115e59;
-  --rp-c-brand-tint: rgba(15, 118, 110, 0.16);
+  --radius: 0.625rem;
+
+  --cyan:               oklch(0.55 0.17 194);
+  --cyan-bright:        oklch(0.72 0.16 194);
+
+  --background:         oklch(1 0 0);
+  --surface:            oklch(0.97 0.004 255);
+  --foreground:         oklch(0.22 0.025 255);
+  --foreground-hover:   oklch(0.15 0.03 255);
+  --card:               oklch(0.97 0.004 255);
+  --card-foreground:    oklch(0.22 0.025 255);
+  --popover:            oklch(0.97 0.004 255);
+  --popover-foreground: oklch(0.15 0.03 255);
+  --primary:            oklch(0.22 0.03 255);
+  --primary-foreground: oklch(0.985 0.002 255);
+  --secondary:          oklch(0.55 0.17 194);
+  --secondary-foreground: oklch(0.985 0.002 255);
+  --muted:              oklch(0.92 0.006 255);
+  --muted-foreground:   oklch(0.52 0.025 255);
+  --accent:             oklch(0.92 0.006 255);
+  --accent-foreground:  oklch(0.22 0.03 255);
+  --destructive:        oklch(0.577 0.245 27.325);
+  --border:             oklch(0.87 0.008 255);
+  --input:              oklch(0.93 0.006 255);
+  --ring:               oklch(0.55 0.17 194);
+
+  --sidebar:                    oklch(0.985 0.002 255);
+  --sidebar-foreground:         oklch(0.22 0.025 255);
+  --sidebar-primary:            oklch(0.22 0.03 255);
+  --sidebar-primary-foreground: oklch(0.985 0.002 255);
+  --sidebar-accent:             oklch(0.94 0.006 255);
+  --sidebar-accent-foreground:  oklch(0.22 0.03 255);
+  --sidebar-border:             oklch(0.87 0.008 255);
+  --sidebar-ring:               oklch(0.55 0.17 194);
+
+  /* rspress brand → cyan */
+  --rp-c-brand:      oklch(0.55 0.17 194);
+  --rp-c-brand-dark: oklch(0.45 0.17 194);
+  --rp-c-brand-tint: oklch(0.55 0.17 194 / 12%);
+
+  --font-sans:    "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+}
+
+.dark {
+  --cyan:               oklch(0.78 0.15 194);
+  --cyan-bright:        oklch(0.85 0.13 194);
+
+  --background:         oklch(0.13 0.025 255);
+  --surface:            oklch(0.18 0.022 255);
+  --foreground:         oklch(0.95 0.006 255);
+  --foreground-hover:   oklch(1 0 0);
+  --card:               oklch(0.16 0.023 255);
+  --card-foreground:    oklch(0.95 0.006 255);
+  --popover:            oklch(0.16 0.023 255);
+  --popover-foreground: oklch(0.95 0.006 255);
+  --primary:            oklch(0.95 0.006 255);
+  --primary-foreground: oklch(0.13 0.025 255);
+  --secondary:          oklch(0.78 0.15 194);
+  --secondary-foreground: oklch(0.13 0.025 255);
+  --muted:              oklch(0.22 0.02 255);
+  --muted-foreground:   oklch(0.62 0.018 255);
+  --accent:             oklch(0.22 0.02 255);
+  --accent-foreground:  oklch(0.95 0.006 255);
+  --destructive:        oklch(0.704 0.191 22.216);
+  --border:             oklch(1 0 0 / 9%);
+  --input:              oklch(1 0 0 / 11%);
+  --ring:               oklch(0.78 0.15 194);
+
+  --sidebar:                    oklch(0.15 0.024 255);
+  --sidebar-foreground:         oklch(0.95 0.006 255);
+  --sidebar-primary:            oklch(0.78 0.15 194);
+  --sidebar-primary-foreground: oklch(0.13 0.025 255);
+  --sidebar-accent:             oklch(0.20 0.022 255);
+  --sidebar-accent-foreground:  oklch(0.95 0.006 255);
+  --sidebar-border:             oklch(1 0 0 / 8%);
+  --sidebar-ring:               oklch(0.78 0.15 194);
+
+  --rp-c-brand:      oklch(0.78 0.15 194);
+  --rp-c-brand-dark: oklch(0.68 0.16 194);
+  --rp-c-brand-tint: oklch(0.78 0.15 194 / 14%);
+}
+
+@theme inline {
+  --color-sidebar:                    var(--sidebar);
+  --color-sidebar-foreground:         var(--sidebar-foreground);
+  --color-sidebar-primary:            var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent:             var(--sidebar-accent);
+  --color-sidebar-accent-foreground:  var(--sidebar-accent-foreground);
+  --color-sidebar-border:             var(--sidebar-border);
+  --color-sidebar-ring:               var(--sidebar-ring);
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up:   accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to   { height: var(--radix-accordion-content-height); }
+  }
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to   { height: 0; }
+  }
+}
+
+/* ── Typography ─────────────────────────────────────────────────────── */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.font-display {
+  font-family: var(--font-display), serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.font-title {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* ── Glass surfaces ──────────────────────────────────────────────────── */
+.glass-card {
+  border-radius: 0;
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in oklch, var(--card) 70%, transparent),
+    color-mix(in oklch, var(--card) 30%, transparent)
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid color-mix(in oklch, var(--border) 60%, transparent);
+  box-shadow: 0 1px 3px oklch(0 0 0 / 6%);
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-card:hover {
+  border-color: color-mix(in oklch, var(--border) 100%, transparent);
+  box-shadow: 0 2px 8px oklch(0 0 0 / 10%);
+}
+
+.dark .glass-card {
+  background: linear-gradient(
+    to bottom right,
+    oklch(1 0 0 / 5%),
+    oklch(1 0 0 / 2%)
+  );
+  border: 1px solid oklch(1 0 0 / 8%);
+}
+
+.dark .glass-card:hover {
+  border-color: oklch(1 0 0 / 16%);
+  background: linear-gradient(
+    to bottom right,
+    oklch(1 0 0 / 8%),
+    oklch(1 0 0 / 3%)
+  );
+}
+
+/* ── Project page header ─────────────────────────────────────────────── */
+.project-header {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  padding: 2rem 2.25rem;
+  margin: 0.5rem 0 2.5rem;
+}
+
+.project-header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(to right, var(--cyan), transparent 70%);
+}
+
+.project-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.875rem;
+}
+
+.project-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklch, var(--cyan) 35%, transparent);
+  background: var(--rp-c-brand-tint);
+  color: var(--cyan);
+  font-family: ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+}
+
+.project-title {
+  margin: 0 !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: 2.25rem;
+  line-height: 1.1;
+  color: var(--foreground);
+}
+
+.project-desc {
+  margin: 0.625rem 0 0;
+  max-width: 42rem;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* Square bordered buttons, same style as LYSZT's portfolio actions */
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: background 0.2s ease;
+}
+
+.project-btn:hover {
+  background: var(--muted);
+  color: var(--foreground);
+}
+
+.nav-glass {
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in oklch, var(--surface) 78%, transparent),
+    color-mix(in oklch, var(--surface) 50%, transparent)
+  );
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid color-mix(in oklch, var(--border) 60%, transparent);
+}
+
+.dark .nav-glass {
+  background: linear-gradient(
+    to bottom right,
+    oklch(1 0 0 / 5%),
+    oklch(1 0 0 / 2%)
+  );
+  border-bottom: 1px solid oklch(1 0 0 / 7%);
+}
+
+/* ── Apply glass to rspress chrome (rspress v2 uses rp-* class names) ── */
+body .rp-nav,
+body:not(.notTopArrived) .rp-nav {
+  width: 100% !important;
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in oklch, var(--surface) 60%, transparent),
+    color-mix(in oklch, var(--surface) 40%, transparent)
+  ) !important;
+  backdrop-filter: blur(40px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+  border: none !important;
+  border-bottom: 1px solid color-mix(in oklch, var(--border) 50%, transparent) !important;
+  border-radius: 0 !important;
+  box-shadow: 0 1px 4px oklch(0 0 0 / 4%) !important;
+}
+
+.dark body .rp-nav,
+.dark body:not(.notTopArrived) .rp-nav {
+  background: linear-gradient(
+    to bottom right,
+    oklch(0.13 0.025 255 / 70%),
+    oklch(0.13 0.025 255 / 50%)
+  ) !important;
+  border-bottom: 1px solid oklch(1 0 0 / 6%) !important;
+  box-shadow: 0 1px 4px oklch(0 0 0 / 20%) !important;
+}
+
+.rp-doc-layout__sidebar {
+  background: color-mix(in oklch, var(--surface) 80%, transparent) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-right: 1px solid color-mix(in oklch, var(--border) 50%, transparent) !important;
+}
+
+.dark .rp-doc-layout__sidebar {
+  background: oklch(1 0 0 / 4%) !important;
+  border-right: 1px solid oklch(1 0 0 / 6%) !important;
+}
+
+/* ── Animations ─────────────────────────────────────────────────────── */
+@keyframes lux_rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes generic_fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes title_fade {
+  0%   { opacity: 0; filter: brightness(0%); }
+  50%  { filter: brightness(10%); opacity: 1; }
+  to   { opacity: 1; filter: brightness(100%); }
+}
+
+.lux-rise {
+  animation: lux_rise 0.7s both cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.animate-fade-in {
+  animation: generic_fade 0.2s ease-out both;
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .lux-rise,
+  .animate-fade-in {
+    animation: none !important;
+    opacity: 1 !important;
+  }
 }
