@@ -1,0 +1,176 @@
+{
+  "core": [
+    {
+      "slug": "undertale-in-extremis",
+      "name": "Undertale In Extremis",
+      "desc": "Project for Computer Organization (Organização de Computadores). Undertale-like Assembly Risc-V RPG battle simulator. ",
+      "url": "https://github.com/lyszt/undertale-in-extremis_core",
+      "homepage": "",
+      "lang": "TeX",
+      "stars": 0,
+      "updatedAt": "2026-06-04T00:28:37Z"
+    },
+    {
+      "slug": "fleur-de-lys",
+      "name": "Fleur De Lys",
+      "desc": "",
+      "url": "https://github.com/lyszt/fleur-de-lys_core",
+      "homepage": "",
+      "lang": "Shell",
+      "stars": 0,
+      "updatedAt": "2026-05-16T17:30:37Z"
+    },
+    {
+      "slug": "iris-client",
+      "name": "Iris Client",
+      "desc": "Iris is a systems-level utility built in C for project management. It abstracts shell and implements a macro execution engine.",
+      "url": "https://github.com/lyszt/iris-client_core",
+      "homepage": "",
+      "lang": "C",
+      "stars": 2,
+      "updatedAt": "2026-05-06T19:34:28Z"
+    },
+    {
+      "slug": "ryujinni",
+      "name": "Ryujinni",
+      "desc": "The Elixir version of the Clairemont bot from Discord, powered by the Providence Network (Providentia).",
+      "url": "https://github.com/lyszt/ryujinni_core",
+      "homepage": "",
+      "lang": "Elixir",
+      "stars": 0,
+      "updatedAt": "2026-03-28T21:18:46Z"
+    },
+    {
+      "slug": "providence",
+      "name": "Providence",
+      "desc": "Refactored Providentia Network.",
+      "url": "https://github.com/lyszt/providence_core",
+      "homepage": "",
+      "lang": "Python",
+      "stars": 0,
+      "updatedAt": "2026-03-28T20:43:18Z"
+    },
+    {
+      "slug": "extremis",
+      "name": "Extremis",
+      "desc": "RPG Adventure written in RISC-V Assembly",
+      "url": "https://github.com/lyszt/extremis_core",
+      "homepage": "",
+      "lang": "Assembly",
+      "stars": 0,
+      "updatedAt": "2026-03-16T19:51:50Z"
+    },
+    {
+      "slug": "hedysarum",
+      "name": "Hedysarum",
+      "desc": "Package manager for Fleur de Lys. ",
+      "url": "https://github.com/lyszt/hedysarum_core",
+      "homepage": "",
+      "lang": "Prolog",
+      "stars": 0,
+      "updatedAt": "2026-02-18T02:14:02Z"
+    },
+    {
+      "slug": "dannazione-di-provvidenza",
+      "name": "Dannazione Di Provvidenza",
+      "desc": "Dannazione di Providenza is an AI-powered language learning assistant with OCR capabilities, translation services, and a Firefox browser extension.",
+      "url": "https://github.com/lyszt/dannazione-di-provvidenza_core",
+      "homepage": "",
+      "lang": "Python",
+      "stars": 0,
+      "updatedAt": "2026-02-11T16:45:32Z"
+    },
+    {
+      "slug": "providentia-magnata",
+      "name": "Providentia Magnata",
+      "desc": "Providence is a Discord bot designed to analyze user messages, manage user data, and enhance engagement through language translation and sentiment analysis.",
+      "url": "https://github.com/lyszt/providentia-magnata_core",
+      "homepage": "",
+      "lang": "Python",
+      "stars": 0,
+      "updatedAt": "2026-01-31T17:28:36Z"
+    },
+    {
+      "slug": "talleyrand",
+      "name": "Talleyrand",
+      "desc": ".config Linux configuration manager built in C++. ",
+      "url": "https://github.com/lyszt/talleyrand_core",
+      "homepage": "",
+      "lang": "C++",
+      "stars": 0,
+      "updatedAt": "2026-01-31T17:22:58Z"
+    },
+    {
+      "slug": "french-ship-madame-de-pompadour",
+      "name": "French Ship Madame De Pompadour",
+      "desc": "Social simulation and story generator that creates sci-fi narratives based on Star Trek. OOP Python/Flask with some data structures, Gemini API, React/Vite/Tailwind frontend.",
+      "url": "https://github.com/lyszt/french-ship-madame-de-pompadour_core",
+      "homepage": "",
+      "lang": "Python",
+      "stars": 2,
+      "updatedAt": "2026-01-31T17:20:15Z"
+    },
+    {
+      "slug": "scarlett-citadel",
+      "name": "Scarlett Citadel",
+      "desc": "The Scarlett Citadel. The remade version of my personal website compiled using vite into a static website. Switched for Tesserae, in fact.",
+      "url": "https://github.com/lyszt/scarlett-citadel_core",
+      "homepage": "",
+      "lang": "JavaScript",
+      "stars": 0,
+      "updatedAt": "2026-01-31T17:07:03Z"
+    }
+  ],
+  "legacy": [
+    {
+      "slug": "providentia-type-d-legacy",
+      "name": "Providentia Type D",
+      "desc": "Providentia - Type D is a sophisticated Discord bot developed by the visionary minds of the Kaisaran Empire. Originally designed as a military weapon for strategic operations, this bot has undergone a transformation, evolving into a versatile automation tool and a trusted guardian for server security.",
+      "url": "https://github.com/lyszt/providentia-type-d_legacy",
+      "homepage": "",
+      "lang": "Python",
+      "stars": 0,
+      "updatedAt": "2026-01-31T17:37:11Z"
+    },
+    {
+      "slug": "scarlett-gateway-legacy",
+      "name": "Scarlett Gateway",
+      "desc": "",
+      "url": "https://github.com/lyszt/scarlett-gateway_legacy",
+      "homepage": "https://lystree.000webhostapp.com/",
+      "lang": "PHP",
+      "stars": 0,
+      "updatedAt": "2026-01-31T17:35:53Z"
+    },
+    {
+      "slug": "providentia-network-legacy",
+      "name": "Providentia Network",
+      "desc": "Providentia Network: A Django-powered backend with a persistent database, simultaneously running Discord and Telegram bots. Integrates with external services like Google and university academic systems for advanced reasoning and actions.",
+      "url": "https://github.com/lyszt/providentia-network_legacy",
+      "homepage": "",
+      "lang": "Python",
+      "stars": 0,
+      "updatedAt": "2026-01-31T17:34:13Z"
+    },
+    {
+      "slug": "scarlett-dash-legacy",
+      "name": "Scarlett Dash",
+      "desc": "Personal dashboard.",
+      "url": "https://github.com/lyszt/scarlett-dash_legacy",
+      "homepage": "",
+      "lang": "TypeScript",
+      "stars": 0,
+      "updatedAt": "2026-01-31T17:33:17Z"
+    },
+    {
+      "slug": "providentia-cataclyst-legacy",
+      "name": "Providentia Cataclyst",
+      "desc": "Cataclyst, the successor to the original Providentia bot, was born from the crucible of war. Providentia Type C is a relentless machine of destruction. This relentless automaton not only defends the empire but actively seeks out and obliterates its enemies. ",
+      "url": "https://github.com/lyszt/providentia-cataclyst_legacy",
+      "homepage": "",
+      "lang": "Python",
+      "stars": 0,
+      "updatedAt": "2026-01-31T17:29:04Z"
+    }
+  ]
+}
