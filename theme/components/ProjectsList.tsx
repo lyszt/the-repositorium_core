@@ -23,7 +23,7 @@ function ProjectCard({ p }: { p: Project }) {
       className="glass-card block px-5 py-4 no-underline group transition-all"
     >
       <div className="flex items-baseline justify-between mb-1">
-        <span className="font-sans font-semibold text-sm text-foreground group-hover:text-[var(--cyan)] transition-colors">
+        <span className="font-sans font-semibold text-sm text-foreground group-hover:text-[var(--rp-c-brand)] transition-colors">
           {p.name}
         </span>
         {p.lang && (

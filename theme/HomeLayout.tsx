@@ -87,7 +87,7 @@ export default function HomeLayout() {
                 )}
                 <h3 className="text-base font-bold text-foreground">{p.name}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">{p.desc}</p>
-                <span className="mt-auto text-sm text-muted-foreground group-hover:text-[var(--cyan)] transition-colors">
+                <span className="mt-auto text-sm text-muted-foreground group-hover:text-[var(--rp-c-brand)] transition-colors">
                   View docs →
                 </span>
               </a>
