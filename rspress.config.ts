@@ -4,7 +4,7 @@ import remarkGithubVideo from './theme/lib/remark-github-video';
 
 export default defineConfig({
   root: path.join(__dirname, 'docs'),
-  title: 'The Repositorium',
+  title: 'The Repositorium - Documentation for LYSZT Projects',
   description: 'Technical documentation and dev logs for projects built under LYSZT.',
   icon: '/favicon.ico',
   markdown: {
