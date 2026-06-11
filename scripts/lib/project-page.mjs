@@ -1,0 +1,59 @@
+// Shared template for per-project doc headers.
+// Imported by fetch-github-repos.mjs (online) and regen-project-pages.mjs (offline)
+// so the editorial header stays in sync regardless of how pages are rebuilt.
+
+export const GITHUB_ICON = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .322.216.694.825.576C20.565 21.795 24 17.298 24 12c0-6.63-5.37-12-12-12z"/></svg>`;
+
+export function escapeHtml(s) {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+// Drop the README's own H1 — the generated header already shows the title
+export function stripLeadingH1(md) {
+  return md.replace(/^\s*#\s+[^\n]+\n?/, "");
+}
+
+function formatYear(iso) {
+  const y = new Date(iso).getFullYear();
+  return Number.isNaN(y) ? "" : String(y);
+}
+
+export function generateProjectPage(project) {
+  // Right-aligned metadata, mirroring the index masthead's mono detail line
+  const meta = [
+    project.lang ? `<span>${escapeHtml(project.lang)}</span>` : "",
+    project.stars > 0 ? `<span>&#9733; ${project.stars}</span>` : "",
+    project.updatedAt ? `<span>${formatYear(project.updatedAt)}</span>` : "",
+  ].filter(Boolean);
+
+  const actions = [
+    `    <a class="project-link" href="${project.url}" target="_blank" rel="noopener noreferrer">${GITHUB_ICON}<span>Source</span><span class="project-link-arrow" aria-hidden="true">&#8599;</span></a>`,
+    project.homepage
+      ? `    <a class="project-link" href="${escapeHtml(project.homepage)}" target="_blank" rel="noopener noreferrer"><span>Website</span><span class="project-link-arrow" aria-hidden="true">&#8599;</span></a>`
+      : "",
+  ].filter(Boolean);
+
+  const header = [
+    `<header class="project-header rp-not-doc">`,
+    `  <div class="project-topline">`,
+    `    <a class="project-back" href="/projects/">&#8592; Index</a>`,
+    meta.length ? `    <div class="project-meta">${meta.join("")}</div>` : "",
+    `  </div>`,
+    `  <h1 class="project-title font-display">${escapeHtml(project.name)}</h1>`,
+    project.desc ? `  <p class="project-desc">${escapeHtml(project.desc)}</p>` : "",
+    `  <div class="project-actions">`,
+    ...actions,
+    `  </div>`,
+    `</header>`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const desc = project.desc ? `\ndescription: "${project.desc.replace(/"/g, '\\"')}"` : "";
+
+  return `---\ntitle: "${project.name}"${desc}\n---\n\n${header}\n`;
+}

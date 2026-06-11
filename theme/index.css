@@ -166,44 +166,61 @@ h1, h2, h3, h4, h5, h6 {
   );
 }
 
-/* ── Project page header ─────────────────────────────────────────────── */
+/* ── Project page header (editorial masthead) ────────────────────────── */
 .project-header {
   position: relative;
-  margin: 1.5rem 0 2.5rem;
-  padding: 1.75rem 2rem;
+  margin: 0.5rem 0 2.75rem;
+  padding: 0 0 1.75rem;
+  border-bottom: 1px solid var(--border);
 }
 
-.project-chips {
+/* Topline: back-link on the left, metadata on the right — a running head */
+.project-topline {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.875rem;
-}
-
-.project-chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.2rem 0.65rem;
-  border-radius: 999px;
-  border: 1px solid color-mix(in oklch, var(--rp-c-brand) 30%, transparent);
-  background: var(--rp-c-brand-tint);
-  color: var(--rp-c-brand);
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
   font-family: ui-monospace, monospace;
   font-size: 0.6875rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.project-back {
+  color: var(--muted-foreground);
+  text-decoration: none !important;
+  transition: color 0.2s ease;
+}
+
+.project-back:hover {
+  color: var(--foreground);
+}
+
+.project-meta {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.project-meta span {
+  white-space: nowrap;
 }
 
 .project-title {
   margin: 0 !important;
   border: none !important;
   padding: 0 !important;
-  font-size: 2.25rem;
-  line-height: 1.1;
+  font-family: var(--font-display), serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 0.98;
   color: var(--foreground);
 }
 
 .project-desc {
-  margin: 0.625rem 0 0;
+  margin: 1.25rem 0 0;
   max-width: 42rem;
   font-size: 1.0625rem;
   line-height: 1.6;
@@ -213,8 +230,43 @@ h1, h2, h3, h4, h5, h6 {
 .project-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
+  gap: 1.75rem;
+  margin-top: 2rem;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: color 0.2s ease;
+}
+
+.project-link svg {
+  color: var(--muted-foreground);
+  transition: color 0.2s ease;
+}
+
+.project-link-arrow {
+  font-size: 0.85em;
+  color: var(--muted-foreground);
+  transition: transform 0.25s ease, color 0.2s ease;
+}
+
+.project-link:hover {
+  color: var(--rp-c-brand);
+}
+
+.project-link:hover svg,
+.project-link:hover .project-link-arrow {
+  color: var(--rp-c-brand);
+}
+
+.project-link:hover .project-link-arrow {
+  transform: translate(0.15em, -0.15em);
 }
 
 /* ── Projects index (editorial table-of-contents) ────────────────────── */
@@ -230,28 +282,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .projects-index .entry:hover .entry-title {
   background-size: 100% 1px;
-}
-
-.project-btn {
-  display: flex !important;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0;
-  border: 1px solid var(--border);
-  background: var(--background);
-  color: var(--foreground);
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-decoration: none !important;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.project-btn:hover {
-  background: var(--muted);
-  color: var(--foreground);
-  border-color: color-mix(in oklch, var(--border) 150%, transparent);
 }
 
 .nav-glass {
