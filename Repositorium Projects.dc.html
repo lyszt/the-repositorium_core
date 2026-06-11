@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    a { text-decoration: none; color: inherit; }
+    ::selection { background: rgba(40,54,72,0.12); }
+  </style>
+</helmet>
+
+<div style="min-height: 100vh; font-family: 'Mulish', system-ui, sans-serif; color: #29333f; background: radial-gradient(1100px 620px at 82% -8%, rgba(118,148,196,0.14), transparent 58%), radial-gradient(900px 540px at -8% 112%, rgba(196,170,138,0.13), transparent 58%), linear-gradient(180deg, #efeeec 0%, #eae9e6 100%); background-attachment: fixed;">
+
+  <!-- ░░░ EXPLORATION SWITCHER (tooling chrome, not part of the design) ░░░ -->
+  <div style="position: sticky; top: 0; z-index: 60; display: flex; align-items: center; gap: 16px; padding: 11px 28px; background: rgba(22,30,40,0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.06);">
+    <span style="font: 600 11px 'JetBrains Mono'; letter-spacing: 0.16em; color: #7e8794;">DESIGN&nbsp;EXPLORATION</span>
+    <span style="font: 500 12px 'Mulish'; color: #565f6c;">— two directions, one glass system</span>
+    <div style="margin-left: auto; display: flex; gap: 4px; padding: 4px; background: rgba(255,255,255,0.06); border-radius: 11px;">
+      <button onClick="{{ setA }}" style="{{ aStyle }}">A · Registry</button>
+      <button onClick="{{ setB }}" style="{{ bStyle }}">B · Editorial Index</button>
+    </div>
+  </div>
+
+  <!-- ════════════════ DIRECTION A — REGISTRY ════════════════ -->
+  <sc-if value="{{ isA }}" hint-placeholder-val="{{ true }}">
+  <div style="max-width: 1180px; margin: 0 auto; padding: 28px 40px 110px;">
+
+    <!-- glass wordmark bar -->
+    <div style="display: flex; align-items: center; gap: 16px; padding: 14px 22px; border-radius: 16px; background: rgba(255,255,255,0.5); backdrop-filter: blur(22px) saturate(150%); -webkit-backdrop-filter: blur(22px) saturate(150%); border: 1px solid rgba(255,255,255,0.72); box-shadow: 0 1px 0 rgba(255,255,255,0.65) inset, 0 14px 44px -16px rgba(40,54,72,0.22);">
+      <span style="font: 800 17px 'Mulish'; letter-spacing: 0.02em; color: #1f2935;">LYSZT</span>
+      <span style="width: 1px; height: 16px; background: rgba(40,54,72,0.16);"></span>
+      <span style="font: 500 12px 'JetBrains Mono'; letter-spacing: 0.14em; color: #8b939d;">THE&nbsp;REPOSITORIUM</span>
+      <span style="margin-left: auto; font: 500 12px 'JetBrains Mono'; letter-spacing: 0.04em; color: #6b7682;">github&nbsp;↗</span>
+    </div>
+
+    <!-- header block -->
+    <div style="padding: 64px 8px 40px;">
+      <div style="font: 600 12px 'JetBrains Mono'; letter-spacing: 0.2em; color: #9aa2ac; margin-bottom: 18px;">INDEX&nbsp;/&nbsp;ALL&nbsp;WORK</div>
+      <h1 style="font-family: 'Mulish'; font-weight: 900; font-size: clamp(46px, 6vw, 76px); letter-spacing: -0.025em; line-height: 0.98; margin: 0; color: #1c2733;">Projects</h1>
+      <p style="margin: 22px 0 0; max-width: 54ch; font: 400 18px/1.6 'Mulish'; color: #5d6772;">A working register of everything built under LYSZT — research, games, systems, tooling and bots. Organised by what each thing is.</p>
+      <div style="margin-top: 26px; font: 500 12px 'JetBrains Mono'; letter-spacing: 0.06em; color: #9aa2ac;">{{ statLine }}</div>
+    </div>
+
+    <!-- legend chips -->
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 0 8px 44px;">
+      <sc-for list="{{ groups }}" as="chip" hint-placeholder-count="5">
+        <a href="#a-{{ chip.key }}" style="display: inline-flex; align-items: center; gap: 9px; padding: 8px 15px; border-radius: 999px; background: rgba(255,255,255,0.46); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.66); box-shadow: 0 6px 18px -12px rgba(40,54,72,0.3); transition: transform .2s ease, box-shadow .2s ease;" style-hover="transform: translateY(-2px); box-shadow: 0 12px 26px -14px rgba(40,54,72,0.4);">
+          <span style="width: 9px; height: 9px; border-radius: 50%; background: {{ chip.accent }};"></span>
+          <span style="font: 700 13px 'Mulish'; color: #2b3642;">{{ chip.label }}</span>
+          <span style="font: 500 11px 'JetBrains Mono'; color: #a4abb4;">{{ chip.count }}</span>
+        </a>
+      </sc-for>
+    </div>
+
+    <!-- category sections -->
+    <sc-for list="{{ groups }}" as="group" hint-placeholder-count="5">
+      <div id="a-{{ group.key }}" style="margin-bottom: 44px; scroll-margin-top: 80px;">
+        <div style="display: flex; align-items: center; gap: 14px; padding: 0 10px 16px;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: {{ group.accent }}; box-shadow: 0 0 0 4px {{ group.halo }};"></span>
+          <h2 style="margin: 0; font: 800 13px 'JetBrains Mono'; letter-spacing: 0.16em; text-transform: uppercase; color: #222d39;">{{ group.label }}</h2>
+          <span style="font: 500 14px 'Mulish'; color: #99a1ab;">{{ group.blurb }}</span>
+          <span style="margin-left: auto; font: 500 12px 'JetBrains Mono'; letter-spacing: 0.04em; color: #aab0ba;">{{ group.countLabel }}</span>
+        </div>
+        <div style="padding: 8px; border-radius: 20px; display: flex; flex-direction: column; gap: 2px; background: rgba(255,255,255,0.5); backdrop-filter: blur(22px) saturate(150%); -webkit-backdrop-filter: blur(22px) saturate(150%); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 20px 50px -24px rgba(40,54,72,0.26);">
+          <sc-for list="{{ group.projects }}" as="project" hint-placeholder-count="2">
+            <div onMouseEnter="{{ project.onEnter }}" onMouseLeave="{{ project.onLeave }}" style="display: flex; align-items: flex-start; gap: 22px; padding: 20px 22px; border-radius: 14px; cursor: default; transition: background .25s ease, box-shadow .25s ease;" style-hover="background: rgba(255,255,255,0.72); box-shadow: 0 14px 34px -20px rgba(40,54,72,0.4);">
+              <span style="width: 8px; height: 8px; border-radius: 50%; margin-top: 9px; flex-shrink: 0; background: {{ project.accent }};"></span>
+              <div style="flex: 1; min-width: 0;">
+                <span style="font: 800 19px 'Mulish'; letter-spacing: -0.01em; color: #1f2935;">{{ project.name }}</span>
+                <div style="margin-top: 5px; font: 400 15px/1.55 'Mulish'; color: #5d6772; max-width: 64ch;">{{ project.desc }}</div>
+                <div style="{{ project.detailStyle }}">
+                  <div style="margin-top: 11px; padding-top: 11px; border-top: 1px solid rgba(40,54,72,0.09); font: 400 14px/1.55 'Mulish'; color: #7c848e; max-width: 64ch;">{{ project.detail }}</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 16px; flex-shrink: 0; padding-top: 3px;">
+                <span style="font: 500 12px 'JetBrains Mono'; letter-spacing: 0.03em; color: #9aa2ac;">{{ project.lang }}</span>
+                <span style="{{ project.arrowStyle }}">→</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  </sc-if>
+
+  <!-- ════════════════ DIRECTION B — EDITORIAL INDEX ════════════════ -->
+  <sc-if value="{{ isB }}">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 28px 40px 120px;">
+
+    <!-- glass wordmark bar -->
+    <div style="display: flex; align-items: center; gap: 16px; padding: 14px 22px; border-radius: 16px; background: rgba(255,255,255,0.5); backdrop-filter: blur(22px) saturate(150%); -webkit-backdrop-filter: blur(22px) saturate(150%); border: 1px solid rgba(255,255,255,0.72); box-shadow: 0 1px 0 rgba(255,255,255,0.65) inset, 0 14px 44px -16px rgba(40,54,72,0.22);">
+      <span style="font: 800 17px 'Mulish'; letter-spacing: 0.02em; color: #1f2935;">LYSZT</span>
+      <span style="width: 1px; height: 16px; background: rgba(40,54,72,0.16);"></span>
+      <span style="font: 500 12px 'JetBrains Mono'; letter-spacing: 0.14em; color: #8b939d;">THE&nbsp;REPOSITORIUM</span>
+      <span style="margin-left: auto; font: 500 12px 'JetBrains Mono'; letter-spacing: 0.04em; color: #6b7682;">github&nbsp;↗</span>
+    </div>
+
+    <!-- oversized editorial header -->
+    <div style="padding: 70px 4px 24px; border-bottom: 1px solid rgba(40,54,72,0.12);">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; flex-wrap: wrap;">
+        <h1 style="font-family: 'Mulish'; font-weight: 900; font-size: clamp(58px, 9vw, 130px); letter-spacing: -0.04em; line-height: 0.86; margin: 0; color: #1c2733;">Projects</h1>
+        <p style="margin: 0 0 10px; max-width: 38ch; font: 400 17px/1.6 'Mulish'; color: #5d6772;">An index of everything built under LYSZT, read top to bottom. <span style="color: #99a1ab;">{{ statLine }}</span></p>
+      </div>
+    </div>
+
+    <!-- rail + content -->
+    <div style="display: flex; align-items: flex-start; gap: 64px; padding-top: 56px;">
+
+      <!-- sticky glass rail -->
+      <div style="position: sticky; top: 92px; flex-shrink: 0; width: 208px; padding: 22px; border-radius: 18px; background: rgba(255,255,255,0.5); backdrop-filter: blur(22px) saturate(150%); -webkit-backdrop-filter: blur(22px) saturate(150%); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 18px 46px -22px rgba(40,54,72,0.28);">
+        <div style="font: 600 11px 'JetBrains Mono'; letter-spacing: 0.18em; color: #a4abb4; margin-bottom: 16px;">CATEGORIES</div>
+        <sc-for list="{{ groups }}" as="nav" hint-placeholder-count="5">
+          <a href="#b-{{ nav.key }}" style="display: flex; align-items: center; gap: 11px; padding: 9px 8px; border-radius: 10px; transition: background .2s ease;" style-hover="background: rgba(40,54,72,0.05);">
+            <span style="width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; background: {{ nav.accent }};"></span>
+            <span style="flex: 1; font: 700 14px 'Mulish'; color: #2b3642;">{{ nav.label }}</span>
+            <span style="font: 500 11px 'JetBrains Mono'; color: #a4abb4;">{{ nav.count }}</span>
+          </a>
+        </sc-for>
+      </div>
+
+      <!-- editorial entries -->
+      <div style="flex: 1; min-width: 0;">
+        <sc-for list="{{ groups }}" as="group" hint-placeholder-count="5">
+          <section id="b-{{ group.key }}" style="margin-bottom: 76px; scroll-margin-top: 88px;">
+            <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 8px;">
+              <h2 style="margin: 0; font-family: 'Mulish'; font-weight: 800; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -0.025em; color: #1f2935;">{{ group.label }}</h2>
+              <span style="width: 40px; height: 4px; border-radius: 2px; background: {{ group.accent }};"></span>
+              <span style="margin-left: auto; font: 500 12px 'JetBrains Mono'; letter-spacing: 0.04em; color: #aab0ba;">{{ group.countLabel }}</span>
+            </div>
+            <p style="margin: 0 0 18px; font: 500 15px 'Mulish'; color: #99a1ab;">{{ group.blurb }}</p>
+
+            <sc-for list="{{ group.projects }}" as="project" hint-placeholder-count="2">
+              <div onMouseEnter="{{ project.onEnter }}" onMouseLeave="{{ project.onLeave }}" style="display: flex; gap: 28px; padding: 24px 16px 24px 8px; border-top: 1px solid rgba(40,54,72,0.1); border-radius: 14px; cursor: default; transition: background .25s ease, padding-left .25s ease;" style-hover="background: rgba(255,255,255,0.55); padding-left: 18px;">
+                <span style="font: 500 14px 'JetBrains Mono'; color: {{ project.accent }}; width: 30px; flex-shrink: 0; padding-top: 9px;">{{ project.number }}</span>
+                <div style="flex: 1; min-width: 0;">
+                  <div style="display: flex; align-items: baseline; gap: 18px; justify-content: space-between;">
+                    <span style="flex: 1; min-width: 0; font-family: 'Mulish'; font-weight: 800; font-size: clamp(21px, 2.2vw, 27px); letter-spacing: -0.02em; color: #1c2733;">{{ project.name }}</span>
+                    <span style="flex-shrink: 0; white-space: nowrap; font: 500 12px 'JetBrains Mono'; letter-spacing: 0.04em; color: #aab0ba; padding-top: 4px;">{{ project.lang }}</span>
+                  </div>
+                  <div style="margin-top: 8px; font: 400 16px/1.6 'Mulish'; color: #5d6772; max-width: 60ch;">{{ project.desc }}</div>
+                  <div style="{{ project.detailStyle }}">
+                    <div style="margin-top: 12px; font: 400 15px/1.6 'Mulish'; color: #818a94; max-width: 60ch;">{{ project.detail }}</div>
+                  </div>
+                </div>
+                <span style="{{ project.arrowStyleLg }}">→</span>
+              </div>
+            </sc-for>
+          </section>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { direction: 'A', hovered: null };
+
+  CATS = [
+    { key: 'academic', label: 'Academic', accent: 'oklch(0.56 0.052 256)', halo: 'oklch(0.56 0.052 256 / 0.14)', blurb: 'Research & published work' },
+    { key: 'game',     label: 'Games',    accent: 'oklch(0.57 0.058 28)',  halo: 'oklch(0.57 0.058 28 / 0.14)',  blurb: 'Interactive & RPG systems' },
+    { key: 'systems',  label: 'Systems',  accent: 'oklch(0.55 0.05 158)',  halo: 'oklch(0.55 0.05 158 / 0.14)',  blurb: 'Infrastructure & networks' },
+    { key: 'tool',     label: 'Tooling',  accent: 'oklch(0.62 0.062 78)',  halo: 'oklch(0.62 0.062 78 / 0.14)',  blurb: 'CLIs, managers & assistants' },
+    { key: 'bot',      label: 'Bots',     accent: 'oklch(0.56 0.052 306)', halo: 'oklch(0.56 0.052 306 / 0.14)', blurb: 'Automation & agents' },
+  ];
+
+  PROJECTS = [
+    { id: 'citadels',   cat: 'academic', name: 'Citadels MCTS',            lang: 'Python',     desc: 'Opponent modelling for training Monte Carlo Tree Search agents in the board game Citadels.', detail: 'A hybrid MCTS-RL framework with a persistent decision structure built offline — published at the XV Jornada de Iniciação Científica, UFFS.' },
+    { id: 'uie',        cat: 'game',     name: 'Undertale In Extremis',    lang: 'TeX · ASM',  desc: 'An Undertale-like battle simulator built for a Computer Organization course.', detail: 'RISC-V assembly combat with bullet-hell timing, paired with a fully typeset design dossier.' },
+    { id: 'extremis',   cat: 'game',     name: 'Extremis',                 lang: 'Assembly',   desc: 'A full RPG adventure written entirely in RISC-V assembly.', detail: 'A hand-rolled state machine, map system and combat loop — no runtime, just instructions.' },
+    { id: 'iris',       cat: 'systems',  name: 'Iris Client',              lang: 'C',          desc: 'A systems-level utility for project management that abstracts the shell.', detail: 'Implements a macro execution engine over a thin, predictable POSIX abstraction layer.' },
+    { id: 'providence', cat: 'systems',  name: 'Providence',              lang: 'Python',     desc: 'A refactor of the Providentia Network — the backbone service layer.', detail: 'Cleaner service boundaries, typed messaging and a noticeably smaller runtime footprint.' },
+    { id: 'fleur',      cat: 'tool',     name: 'Fleur de Lys',             lang: 'Shell',      desc: 'A shell toolchain — the foundation the rest of the toolkit is built on.', detail: 'Composable scripts, a strict environment contract, and a single predictable entry point.' },
+    { id: 'hedysarum',  cat: 'tool',     name: 'Hedysarum',               lang: 'Prolog',     desc: 'A package manager for Fleur de Lys, written in Prolog.', detail: 'Dependency resolution modelled as logic programming — constraints in, install plan out.' },
+    { id: 'dannazione', cat: 'tool',     name: 'Dannazione di Provvidenza', lang: 'Python',   desc: 'An AI language-learning assistant with OCR, translation and a Firefox extension.', detail: 'Capture text from anything on screen, translate it in place, and drill the vocabulary it finds.' },
+    { id: 'ryujinni',   cat: 'bot',      name: 'Ryujinni',                lang: 'Elixir',     desc: 'The Elixir rewrite of the Clairemont Discord bot.', detail: 'Runs on the Providence Network — supervised processes, hot code reload and fault tolerance.' },
+  ];
+
+  setDir(d) { this.setState({ direction: d }); }
+  setHover(id) { this.setState({ hovered: id }); }
+
+  btnStyle(active) {
+    return {
+      font: "600 12.5px 'Mulish'", padding: '7px 15px', border: 'none',
+      borderRadius: '8px', cursor: 'pointer', whiteSpace: 'nowrap',
+      transition: 'background .2s ease, color .2s ease',
+      background: active ? '#f4f3f0' : 'transparent',
+      color: active ? '#1c2530' : '#aeb6c0',
+    };
+  }
+
+  renderVals() {
+    const { direction, hovered } = this.state;
+    let n = 0;
+    const groups = this.CATS.map((c) => {
+      const projects = this.PROJECTS.filter((p) => p.cat === c.key).map((p) => {
+        n += 1;
+        const isH = hovered === p.id;
+        return {
+          ...p,
+          accent: c.accent,
+          number: String(n).padStart(2, '0'),
+          onEnter: () => this.setHover(p.id),
+          onLeave: () => this.setHover(null),
+          detailStyle: {
+            maxHeight: isH ? '90px' : '0px',
+            opacity: isH ? 1 : 0,
+            overflow: 'hidden',
+            transition: 'max-height .42s cubic-bezier(.2,.8,.2,1), opacity .3s ease',
+          },
+          arrowStyle: {
+            font: "600 17px 'Mulish'", color: c.accent,
+            opacity: isH ? 1 : 0, transform: isH ? 'translateX(0)' : 'translateX(-6px)',
+            transition: 'opacity .25s ease, transform .25s ease',
+          },
+          arrowStyleLg: {
+            font: "400 24px 'Mulish'", color: c.accent, alignSelf: 'center', flexShrink: 0,
+            opacity: isH ? 1 : 0, transform: isH ? 'translateX(0)' : 'translateX(-8px)',
+            transition: 'opacity .25s ease, transform .25s ease',
+          },
+        };
+      });
+      const count = projects.length;
+      return { ...c, count, countLabel: count + (count === 1 ? ' project' : ' projects'), projects };
+    });
+
+    return {
+      isA: direction === 'A',
+      isB: direction === 'B',
+      groups,
+      statLine: this.PROJECTS.length + ' projects · ' + this.CATS.length + ' categories',
+      setA: () => this.setDir('A'),
+      setB: () => this.setDir('B'),
+      aStyle: this.btnStyle(direction === 'A'),
+      bStyle: this.btnStyle(direction === 'B'),
+    };
+  }
+}
+</script>
+</body>
+</html>

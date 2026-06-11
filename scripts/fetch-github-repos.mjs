@@ -88,7 +88,7 @@ function generateProjectPage(project) {
   ].filter(Boolean);
 
   const header = [
-    `<header class="project-header glass-card">`,
+    `<header class="project-header glass-card rp-not-doc">`,
     chips.length ? `  <div class="project-chips">${chips.join("")}</div>` : "",
     `  <h1 class="project-title font-title">${escapeHtml(project.name)}</h1>`,
     project.desc ? `  <p class="project-desc">${escapeHtml(project.desc)}</p>` : "",
@@ -187,14 +187,32 @@ const all = [...core, ...legacy];
 // Restore readme before generating pages
 const readmeMap = Object.fromEntries(withReadmes.map(({ r, readme }) => [toSlug(r.name), readme]));
 
+const sidebar = {};
+
 for (const project of all) {
   const dir = resolve(PROJECTS_DIR, project.slug);
+  const readme = readmeMap[project.slug] ?? "";
   mkdirSync(dir, { recursive: true });
   writeFileSync(resolve(dir, ".generated"), "");
-  writeFileSync(
-    resolve(dir, "index.md"),
-    generateProjectPage({ ...project, readme: readmeMap[project.slug] ?? "" })
-  );
+  writeFileSync(resolve(dir, "index.md"), generateProjectPage(project));
+
+  const sidebarItems = [
+    { text: "← Projects", link: "/projects/" },
+    { text: "Overview", link: `/projects/${project.slug}/` },
+  ];
+
+  if (readme) {
+    writeFileSync(
+      resolve(dir, "readme.md"),
+      `---\ntitle: "README"\n---\n\n${stripLeadingH1(readme)}`
+    );
+    sidebarItems.push({ text: "README", link: `/projects/${project.slug}/readme` });
+  }
+
+  sidebar[`/projects/${project.slug}/`] = sidebarItems;
 }
+
+// --- Write sidebar config ---
+writeFileSync(resolve(ROOT, "docs/data/sidebar.json"), JSON.stringify(sidebar, null, 2));
 
 console.log(`[fetch-github-repos] Generated ${all.length} project pages → docs/projects/`);
