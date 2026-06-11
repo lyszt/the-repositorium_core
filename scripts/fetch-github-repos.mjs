@@ -1,4 +1,4 @@
-import { writeFileSync, mkdirSync, rmSync, readdirSync, statSync } from "fs";
+import { writeFileSync, mkdirSync, rmSync, readdirSync, statSync, existsSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -176,10 +176,11 @@ writeFileSync(DATA_OUT, JSON.stringify(dataOut, null, 2));
 console.log(`[fetch-github-repos] ${core.length} core, ${legacy.length} legacy → docs/data/github-repos.json`);
 
 // --- Generate docs/projects/<slug>/index.md ---
-// Only wipe generated subdirectories, preserve index.mdx
+// Only wipe directories that were previously auto-generated (have .generated marker)
 for (const entry of readdirSync(PROJECTS_DIR)) {
   const full = resolve(PROJECTS_DIR, entry);
-  if (statSync(full).isDirectory()) rmSync(full, { recursive: true });
+  if (statSync(full).isDirectory() && existsSync(resolve(full, ".generated")))
+    rmSync(full, { recursive: true });
 }
 
 const all = [...core, ...legacy];
@@ -189,6 +190,7 @@ const readmeMap = Object.fromEntries(withReadmes.map(({ r, readme }) => [toSlug(
 for (const project of all) {
   const dir = resolve(PROJECTS_DIR, project.slug);
   mkdirSync(dir, { recursive: true });
+  writeFileSync(resolve(dir, ".generated"), "");
   writeFileSync(
     resolve(dir, "index.md"),
     generateProjectPage({ ...project, readme: readmeMap[project.slug] ?? "" })
