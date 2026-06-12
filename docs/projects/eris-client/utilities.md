@@ -7,22 +7,22 @@ description: "Maintenance commands: rebuild and root."
 
 Small maintenance commands.
 
-## `iris rebuild`
+## `eris rebuild`
 
-Rebuild the Iris binary itself using CMake.
-
-```bash
-iris rebuild
-```
-
-Useful after pulling new Iris source or changing its build configuration — it reconfigures and recompiles without leaving the project you're working in.
-
-## `iris root`
-
-Print the detected Iris project root.
+Rebuild the Eris binary itself using CMake.
 
 ```bash
-iris root
+eris rebuild
 ```
 
-Iris walks up from the current directory to find the `.iris/` directory created by [`iris init`](./init); `iris root` prints the path it resolves to. Handy in scripts and for confirming which project context Iris is operating in.
+Useful after pulling new Eris source or changing its build configuration — it reconfigures and recompiles without leaving the project you're working in.
+
+## `eris root`
+
+Print the detected Eris project root.
+
+```bash
+eris root
+```
+
+Eris walks up from the current directory to find the `.eris/` directory created by [`eris init`](./init); `eris root` prints the path it resolves to. Handy in scripts and for confirming which project context Eris is operating in.

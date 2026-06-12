@@ -1,21 +1,21 @@
 ---
-title: "iris alias / run"
+title: "eris alias / run"
 description: "Save named sequences of shell commands and replay them."
 ---
 
-# `iris alias` — macros
+# `eris alias` — macros
 
 Save a named sequence of shell commands (a macro) and replay it on demand.
 
 ```bash
-iris alias add <name> ...     # define a macro
-iris alias run <name>         # run it
-iris run <name>               # shorthand for "alias run"
+eris alias add <name> ...     # define a macro
+eris alias run <name>         # run it
+eris run <name>               # shorthand for "alias run"
 ```
 
 ## Where macros live
 
-Macros are stored in `.iris/.iris.macros` at the project root, in an INI-style format:
+Macros are stored in `.eris/.eris.macros` at the project root, in an INI-style format:
 
 ```ini
 [deploy]
@@ -29,25 +29,25 @@ ssh prod "systemctl restart app"
 With the `do` separator — no quoting needed, each `do` starts a new command:
 
 ```bash
-iris alias add deploy do make build do git push origin main
+eris alias add deploy do make build do git push origin main
 ```
 
 With quotes — for commands that contain semicolons or other shell syntax:
 
 ```bash
-iris alias add test "npm run lint" "npm test"
+eris alias add test "npm run lint" "npm test"
 ```
 
 ## Running a macro
 
 ```bash
-iris alias run deploy
-iris run deploy            # shorthand
+eris alias run deploy
+eris run deploy            # shorthand
 ```
 
 Each line in the macro runs in sequence.
 
 ## Related
 
-- [`iris init`](./init) — creates the macros file.
+- [`eris init`](./init) — creates the macros file.
 - [Command chaining](./chaining) — combine macros with `and` / `or`.

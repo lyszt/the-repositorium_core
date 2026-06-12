@@ -1,16 +1,16 @@
 ---
 title: "Command chaining"
-description: "Combine Iris commands with and, or, and not using the Prolog router."
+description: "Combine Eris commands with and, or, and not using the Prolog router."
 ---
 
 # Command chaining
 
-Iris's command router is written in Prolog. It understands logical connectives directly in the argument list, so commands compose with real success/failure semantics.
+Eris's command router is written in Prolog. It understands logical connectives directly in the argument list, so commands compose with real success/failure semantics.
 
-The connectives are the **words** `and`, `or`, and `not` — *not* the shell operators `&&` / `||`. The shell would intercept `&&` and `||` before Iris ever saw them; plain words pass straight through to Iris. You also write `iris` only once:
+The connectives are the **words** `and`, `or`, and `not` — *not* the shell operators `&&` / `||`. The shell would intercept `&&` and `||` before Eris ever saw them; plain words pass straight through to Eris. You also write `eris` only once:
 
 ```bash
-iris init myapp and commit       # one iris, words between commands
+eris init myapp and commit       # one eris, words between commands
 ```
 
 ## Operators
@@ -24,15 +24,15 @@ iris init myapp and commit       # one iris, words between commands
 ## Examples
 
 ```bash
-iris init myapp and commit   # commit only if init succeeded
-iris init or root            # if init fails, fall back to printing the root
-iris not init                # succeed when init fails
+eris init myapp and commit   # commit only if init succeeded
+eris init or root            # if init fails, fall back to printing the root
+eris not init                # succeed when init fails
 ```
 
-Chains can mix any Iris commands, including [macros](./macros):
+Chains can mix any Eris commands, including [macros](./macros):
 
 ```bash
-iris run build and commit and rebase
+eris run build and commit and rebase
 ```
 
 ## Related

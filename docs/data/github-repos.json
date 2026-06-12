@@ -3,7 +3,7 @@
     {
       "slug": "eris-client",
       "name": "Eris Client",
-      "desc": "Iris is a systems-level utility built in C for project management. It abstracts shell and implements a macro execution engine.",
+      "desc": "Eris is a systems-level utility built in C for project management. It abstracts shell and implements a macro execution engine.",
       "url": "https://github.com/lyszt/eris-client_core",
       "homepage": "",
       "lang": "C",

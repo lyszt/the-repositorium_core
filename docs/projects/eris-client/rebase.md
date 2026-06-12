@@ -1,14 +1,14 @@
 ---
-title: "iris rebase"
+title: "eris rebase"
 description: "Rebase a branch onto the freshly-updated base branch."
 ---
 
-# `iris rebase`
+# `eris rebase`
 
 Bring a branch up to date by rebasing it onto the latest base branch.
 
 ```bash
-iris rebase [branch]
+eris rebase [branch]
 ```
 
 `branch` is optional and defaults to the **current** branch.
@@ -21,11 +21,11 @@ iris rebase [branch]
 4. Checks out the target branch (the argument, or your current branch).
 5. Rebases the target onto the freshly-updated base.
 
-If the target *is* the base branch, Iris stops — there's nothing to rebase.
+If the target *is* the base branch, Eris stops — there's nothing to rebase.
 
 ## Conflicts
 
-If the rebase hits conflicts, Iris stops and tells you to resolve them and continue manually:
+If the rebase hits conflicts, Eris stops and tells you to resolve them and continue manually:
 
 ```bash
 # resolve conflicts in your editor, then:
@@ -35,10 +35,10 @@ git rebase --continue
 ## Examples
 
 ```bash
-iris rebase                 # rebase the current branch onto the base
-iris rebase feature/login   # rebase a specific branch
+eris rebase                 # rebase the current branch onto the base
+eris rebase feature/login   # rebase a specific branch
 ```
 
 ## Related
 
-- [`iris branch`](./branch) — create the branch you'll later rebase.
+- [`eris branch`](./branch) — create the branch you'll later rebase.

@@ -1,6 +1,6 @@
 ---
 name: Rspress Layout component override with conditional content injection
-description: Override Rspress's built-in Layout component to inject custom content (e.g., a sponsor iframe) at the bottom of specific pages based on route path
+description: Override Rspress's built-in Layout component to inject custom-styled content into the doc content flow of specific pages based on route path
 source: auto-skill
 extracted_at: '2026-06-12T17:37:37.982Z'
 ---
@@ -9,17 +9,17 @@ extracted_at: '2026-06-12T17:37:37.982Z'
 
 ## Problem
 
-You want to add a custom element (e.g., a GitHub Sponsors iframe, a banner, a call-to-action) to the bottom of every page under a specific path prefix (e.g., `/projects/`), without editing each markdown file individually.
+You want to add a custom element (e.g., a support/sponsor call-to-action, a banner, a notice) to every page under a specific path prefix (e.g., `/projects/`), without editing each markdown file individually. The element must match the site's design system (custom-styled card, not a raw embed/iframe).
 
 ## Solution: Wrap Rspress's built-in `Layout` component
 
-Rspress's theme system allows you to override any of its built-in components by exporting them from your `theme/index.tsx`. The `Layout` component accepts a `bottom` prop that renders content at the very bottom of every page. By wrapping `Layout` with a custom component that conditionally passes content via `bottom`, you avoid touching Rspress internals or individual page files.
+Rspress's theme system allows you to override any of its built-in components by exporting them from your `theme/index.tsx`. The `Layout` component forwards slot props (like `afterDocContent`, `bottom`, `beforeDocFooter`, etc.) to the inner `DocLayout`. By wrapping `Layout` with a conditional component, you inject content only where needed, using a custom-styled element that respects the site's design tokens.
 
 ## Step-by-step
 
 **1. Understand Rspress's theme override system**
 
-In `theme/index.tsx`, you re-export everything from `@rspress/core/theme-original` and then override specific components:
+In `theme/index.tsx`, re-export everything from `@rspress/core/theme-original` and override specific components:
 
 ```tsx
 import './index.css';
@@ -31,7 +31,7 @@ export { default as Layout } from './Layout';            // override main layout
 
 Rspress automatically picks up the exported `Layout` component and uses it as the page shell.
 
-**2. Create the custom Layout wrapper**
+**2. Create the custom Layout wrapper with a styled sponsor card**
 
 Create `theme/Layout.tsx`:
 
@@ -40,32 +40,41 @@ import { useLocation } from '@rspress/core/runtime';
 import { Layout as OriginalLayout } from '@rspress/core/theme-original';
 import type { LayoutProps } from '@rspress/core/theme';
 
+function SponsorCard() {
+  return (
+    <div className="rp-sponsor-card">
+      <div className="rp-sponsor-card__body">
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 14.25s-5.5-3.5-5.5-7a3.5 3.5 0 0 1 6.5-1.73A3.5 3.5 0 0 1 13.5 7c0 3.5-5.5 7-5.5 7Z" />
+        </svg>
+        <div className="rp-sponsor-card__text">
+          <strong>Support this project</strong>
+          <span>Your sponsorship helps maintain and improve the tools documented here.</span>
+        </div>
+      </div>
+      <a className="rp-sponsor-card__action" href="https://github.com/sponsors/lyszt"
+         target="_blank" rel="noopener noreferrer">
+        Sponsor<span aria-hidden="true">&nbsp;&#8599;</span>
+      </a>
+    </div>
+  );
+}
+
 export default function Layout(props: LayoutProps) {
   const { pathname } = useLocation();
-
-  // Condition: only inject content on pages under /projects/
   const isTargetPage = pathname.startsWith('/projects/');
 
   if (!isTargetPage) {
-    // Pass through unchanged for non-target pages
     return <OriginalLayout {...props} />;
   }
 
   return (
     <OriginalLayout
       {...props}
-      bottom={
+      afterDocContent={
         <>
-          {props.bottom}
-          <div className="rp-custom-footer">
-            <iframe
-              src="https://github.com/sponsors/lyszt/card"
-              title="Sponsor lyszt"
-              height="225"
-              width="600"
-              style={{ border: 0 }}
-            />
-          </div>
+          {props.afterDocContent}
+          <SponsorCard />
         </>
       }
     />
@@ -75,35 +84,107 @@ export default function Layout(props: LayoutProps) {
 
 **Key details:**
 
-- `useLocation()` is imported from `@rspress/core/runtime` — it's a re-export of `react-router-dom`'s `useLocation`.
-- The `Layout` component's `bottom` prop renders content after the main page content (nav, content area, etc.). Other available slot props include `top`, `beforeNav`, `afterNav`, `beforeDoc`, `afterDoc`, `beforeDocContent`, `afterDocContent`, `beforeDocFooter`, `afterDocFooter`, `beforeSidebar`, `afterSidebar`, `beforeOutline`, `afterOutline`.
-- Always spread `...props` onto the original Layout so all other customization (nav, sidebar, etc.) still works.
-- If the original `bottom` prop already has content (e.g., from other customizations), chain it with the new content using a Fragment.
+- `useLocation()` is imported from `@rspress/core/runtime` — a re-export of `react-router-dom`'s `useLocation`.
+- Always spread `...props` onto the original Layout so other customizations (nav, sidebar, etc.) still work.
+- Chain slot content with existing content using a Fragment: `{props.afterDocContent}<YourElement />`.
+- **Do NOT use `bottom` for content that should appear within the doc content flow.** `bottom` renders at the very bottom of the entire page (after everything), which looks disconnected from the content.
 
-**3. Add accompanying CSS**
+**3. Choose the right slot for your content**
 
-Add styles in `theme/index.css` to position and space the injected content:
+| Slot | Position | Use case |
+|---|---|---|
+| `afterDocContent` | Right after rendered markdown, before doc footer (edit link, prev/next) | **Best for CTAs, sponsor cards, notices** — within content flow |
+| `beforeDocContent` | Right before rendered markdown | Banners, migration notices |
+| `afterDocFooter` | After prev/next page links | Disclaimers, footnotes |
+| `bottom` | Very bottom of the full page (outside content area) | Site-wide footer elements |
+| `top` | Top of the full page (above nav) | Alert banners, maintenance notices |
+
+**4. Style the card using the site's design tokens**
+
+Add to `theme/index.css`. Use the site's existing CSS custom properties (OKLCH color vars) so the card respects both light and dark themes:
 
 ```css
-.rp-custom-footer {
+.rp-sponsor-card {
   display: flex;
-  justify-content: center;
-  padding: 3rem 1.5rem 4rem;
-  border-top: 1px solid var(--border);
-  margin-top: 3rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.rp-sponsor-card__body {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--muted-foreground);
+}
+
+.rp-sponsor-card__body svg {
+  flex-shrink: 0;
+  color: var(--foreground);
+}
+
+.rp-sponsor-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.rp-sponsor-card__text strong {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.rp-sponsor-card__action {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--background);
+  background: var(--foreground);
+  text-decoration: none !important;
+  transition: background 0.2s ease;
+}
+
+.rp-sponsor-card__action:hover {
+  background: var(--foreground-hover);
 }
 ```
 
-**4. Verify the build**
+**Key CSS principles:**
+- Use `var(--surface)` for card background, `var(--border)` for borders — they adapt to light/dark automatically
+- Use CSS variables from the site's custom properties (OKLCH color space) — never hardcode hex colors
+- The action button inverts: `color: var(--background)` on `background: var(--foreground)` for a solid button
+- Arrow / decorative icons use `--muted-foreground` for secondary text
+
+**5. Verify the build**
 
 ```bash
 npx rspress build
 ```
 
 Check that:
-- The custom content appears on target pages (e.g., `/projects/some-project/`)
-- Non-target pages are unaffected (e.g., `/guide/`, `/index.html`)
+- The custom content appears on target pages, within the doc content flow (before doc footer, not at page bottom)
+- Non-target pages are unaffected
+- The card respects both light and dark themes
 - The original layout features (sidebar, nav, search) still work correctly
+
+## Important lessons (from user feedback)
+
+1. **Position matters.** Placing content via `bottom` renders it at the very bottom of the full page — below the sidebar, below the prev/next navigation. This feels disconnected and "ugly." Use `afterDocContent` to place it within the content flow, naturally before the prev/next page links.
+
+2. **Don't embed raw iframes.** Third-party iframes (like GitHub Sponsors cards) don't respect the site's design system — they render white boxes on dark themes and vice versa. Instead, build a custom card using the site's own design tokens. The user will confirm this as "much better very good."
+
+3. **Use the site's CSS custom properties.** `--surface`, `--border`, `--foreground`, `--muted-foreground`, `--background` are already defined for light and dark modes. Using them ensures the injected content matches without additional theme logic.
+
+4. **Keep slot choices minimal.** You don't need a table of every slot prop in your component. Learn the 3–4 most useful ones (`afterDocContent`, `beforeDocContent`, `bottom`, `top`) and reach for the others only when needed.
 
 ## Route detection patterns
 
@@ -115,40 +196,15 @@ Check that:
 | Multiple sections | `pathname.startsWith('/projects/') \|\| pathname.startsWith('/guide/')` | Pages across sections |
 | Not a page | `!pathname.startsWith('/projects/')` | All pages except project pages |
 
-## Available Layout slot props
-
-| Prop | Position |
-|---|---|
-| `top` | Above everything (before nav) |
-| `bottom` | Below everything (after page content) |
-| `beforeNav` | Just before the nav bar |
-| `afterNav` | Just after the nav bar |
-| `beforeDoc` | At the start of the document content area |
-| `afterDoc` | At the end of the document content area |
-| `beforeDocContent` | Before the rendered markdown content |
-| `afterDocContent` | After the rendered markdown content |
-| `beforeDocFooter` | Before the doc footer (edit link, prev/next) |
-| `afterDocFooter` | After the doc footer |
-| `beforeSidebar` | Above the sidebar |
-| `afterSidebar` | Below the sidebar |
-| `beforeOutline` | Above the table of contents outline |
-| `afterOutline` | Below the table of contents outline |
-| `beforeHero` | Before the home hero section |
-| `afterHero` | After the home hero section |
-| `beforeFeatures` | Before the home features section |
-| `afterFeatures` | After the home features section |
-| `beforeNavMenu` | Before the nav menu items |
-| `afterNavMenu` | After the nav menu items |
-
 ## When to use this approach
 
 - You want to inject content into multiple pages without editing each markdown file
-- The content placement matches one of the Layout slot props (typically `top` or `bottom`)
-- You need conditional logic (route-based, frontmatter-based, or environment-based) to decide where content appears
-- You prefer a React component wrapper over CSS-only solutions or remark/rehype plugins
+- The content should appear within the doc content flow (after the rendered markdown, before the doc footer)
+- You need conditional logic (route-based) to decide where content appears
+- The injected content needs to match the site's design system (custom-styled, not a raw embed)
 
 ## Alternative approaches
 
-- **Remark/rehype plugin** — transforms the markdown AST; good for injecting into the document body itself (e.g., after every heading), but harder to inject outside the content area
-- **CSS `::after` / `::before`** — limited to decorative content; cannot render interactive elements like iframes
+- **Remark/rehype plugin** — transforms the markdown AST; good for injecting into the document body itself, but harder to match site design tokens
+- **CSS-only** — limited to decorative content; cannot render interactive elements like buttons
 - **Per-page markdown includes** — requires editing every file; not DRY

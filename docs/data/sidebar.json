@@ -45,27 +45,27 @@
       "link": "/projects/eris-client/introduction"
     },
     {
-      "text": "iris init",
+      "text": "eris init",
       "link": "/projects/eris-client/init"
     },
     {
-      "text": "iris commit",
+      "text": "eris commit",
       "link": "/projects/eris-client/commit"
     },
     {
-      "text": "iris branch",
+      "text": "eris branch",
       "link": "/projects/eris-client/branch"
     },
     {
-      "text": "iris rebase",
+      "text": "eris rebase",
       "link": "/projects/eris-client/rebase"
     },
     {
-      "text": "iris ignore",
+      "text": "eris ignore",
       "link": "/projects/eris-client/ignore"
     },
     {
-      "text": "iris alias / run",
+      "text": "eris alias / run",
       "link": "/projects/eris-client/macros"
     },
     {
