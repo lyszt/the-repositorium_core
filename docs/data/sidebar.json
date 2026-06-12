@@ -27,54 +27,54 @@
       "link": "/projects/fleur-de-lys/readme"
     }
   ],
-  "/projects/iris-client/": [
+  "/projects/eris-client/": [
     {
       "text": "← Projects",
       "link": "/projects/"
     },
     {
       "text": "Overview",
-      "link": "/projects/iris-client/"
+      "link": "/projects/eris-client/"
     },
     {
       "text": "README",
-      "link": "/projects/iris-client/readme"
+      "link": "/projects/eris-client/readme"
     },
     {
       "text": "Introduction",
-      "link": "/projects/iris-client/introduction"
+      "link": "/projects/eris-client/introduction"
     },
     {
       "text": "iris init",
-      "link": "/projects/iris-client/init"
+      "link": "/projects/eris-client/init"
     },
     {
       "text": "iris commit",
-      "link": "/projects/iris-client/commit"
+      "link": "/projects/eris-client/commit"
     },
     {
       "text": "iris branch",
-      "link": "/projects/iris-client/branch"
+      "link": "/projects/eris-client/branch"
     },
     {
       "text": "iris rebase",
-      "link": "/projects/iris-client/rebase"
+      "link": "/projects/eris-client/rebase"
     },
     {
       "text": "iris ignore",
-      "link": "/projects/iris-client/ignore"
+      "link": "/projects/eris-client/ignore"
     },
     {
       "text": "iris alias / run",
-      "link": "/projects/iris-client/macros"
+      "link": "/projects/eris-client/macros"
     },
     {
       "text": "Command chaining",
-      "link": "/projects/iris-client/chaining"
+      "link": "/projects/eris-client/chaining"
     },
     {
       "text": "Utilities",
-      "link": "/projects/iris-client/utilities"
+      "link": "/projects/eris-client/utilities"
     }
   ],
   "/projects/ryujinni/": [

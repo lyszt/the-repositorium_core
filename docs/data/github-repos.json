@@ -1,4 +1,16 @@
 {
+  "phare": [
+    {
+      "slug": "eris-client",
+      "name": "Eris Client",
+      "desc": "Iris is a systems-level utility built in C for project management. It abstracts shell and implements a macro execution engine.",
+      "url": "https://github.com/lyszt/eris-client_core",
+      "homepage": "",
+      "lang": "C",
+      "stars": 2,
+      "updatedAt": "2026-05-06T19:34:28Z"
+    }
+  ],
   "core": [
     {
       "slug": "undertale-in-extremis",
@@ -19,16 +31,6 @@
       "lang": "Shell",
       "stars": 0,
       "updatedAt": "2026-05-16T17:30:37Z"
-    },
-    {
-      "slug": "iris-client",
-      "name": "Iris Client",
-      "desc": "Iris is a systems-level utility built in C for project management. It abstracts shell and implements a macro execution engine.",
-      "url": "https://github.com/lyszt/iris-client_core",
-      "homepage": "",
-      "lang": "C",
-      "stars": 2,
-      "updatedAt": "2026-05-06T19:34:28Z"
     },
     {
       "slug": "ryujinni",

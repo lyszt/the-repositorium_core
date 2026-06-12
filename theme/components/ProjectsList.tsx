@@ -11,16 +11,62 @@ type Project = {
   updatedAt: string;
 };
 
-const { core, legacy } = reposData as {
+const { phare, core, legacy } = reposData as {
+  phare: Project[];
   core: Project[];
   legacy: Project[];
 };
 
-const total = core.length + legacy.length;
+const total = phare.length + core.length + legacy.length;
 
 function formatYear(iso: string): string {
   const y = new Date(iso).getFullYear();
   return Number.isNaN(y) ? '' : String(y);
+}
+
+/* Phare entry — featured project, visually distinct from regular entries. */
+function PhareEntry({ p, delay }: { p: Project; delay: number }) {
+  const year = formatYear(p.updatedAt);
+
+  return (
+    <a
+      href={`/projects/${p.slug}/`}
+      style={{ animationDelay: `${delay}ms` }}
+      className="phare-entry group lux-rise flex flex-col gap-3 no-underline
+                 border border-border rounded-sm p-6 md:p-8
+                 transition-[background,border-color] duration-300
+                 hover:bg-[color-mix(in_oklch,var(--foreground)_4%,transparent)]
+                 hover:border-[color-mix(in_oklch,var(--foreground)_30%,transparent)]"
+    >
+      <div className="flex items-center justify-between">
+        <span className="font-mono text-[0.6875rem] tracking-[0.2em] uppercase text-[var(--rp-c-brand)]">
+          phare
+        </span>
+        <div className="flex items-center gap-3 font-mono text-[0.6875rem] tracking-[0.08em] text-muted-foreground/70">
+          {p.lang && <span>{p.lang}</span>}
+          {p.stars > 0 && <span>★ {p.stars}</span>}
+          {year && <span>{year}</span>}
+        </div>
+      </div>
+
+      <h3 className="font-display text-3xl md:text-4xl leading-[1.1] text-foreground m-0
+                     transition-colors duration-200">
+        {p.name}
+        <span aria-hidden className="entry-arrow inline-block ml-3 align-middle text-xl
+                                     opacity-0 -translate-x-1 transition-all duration-300
+                                     group-hover:opacity-100 group-hover:translate-x-0
+                                     text-[var(--rp-c-brand)]">
+          →
+        </span>
+      </h3>
+
+      {p.desc && (
+        <p className="text-sm md:text-base leading-relaxed text-muted-foreground m-0 max-w-2xl">
+          {p.desc}
+        </p>
+      )}
+    </a>
+  );
 }
 
 /* A single index entry — reads like a line in a printed table of contents. */
@@ -144,8 +190,25 @@ export default function ProjectsList() {
         </p>
       </header>
 
-      <Section index="I" label="Core" projects={core} startDelay={0} />
-      <Section index="II" label="Legacy" projects={legacy} startDelay={core.length * 45} />
+      {phare.length > 0 && (
+        <section className="mt-16 first:mt-0">
+          <header className="flex items-baseline justify-between mb-4">
+            <h2 className="font-mono text-[0.6875rem] font-medium tracking-[0.22em] uppercase
+                           text-muted-foreground m-0">
+              <span className="text-[var(--rp-c-brand)]">◆</span>
+              <span className="mx-2 text-muted-foreground/40">/</span>
+              Phare
+            </h2>
+          </header>
+          <div className="flex flex-col gap-3">
+            {phare.map((p, i) => (
+              <PhareEntry key={p.slug} p={p} delay={i * 45} />
+            ))}
+          </div>
+        </section>
+      )}
+      <Section index="I" label="Core" projects={core} startDelay={phare.length * 45} />
+      <Section index="II" label="Legacy" projects={legacy} startDelay={(phare.length + core.length) * 45} />
     </div>
   );
 }

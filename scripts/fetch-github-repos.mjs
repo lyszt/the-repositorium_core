@@ -10,6 +10,7 @@ const PROJECTS_DIR = resolve(ROOT, "docs/projects");
 
 const BLOCKED = new Set(["lyszt", "lyszt.github.io", "the-repositorium_core"]);
 const BLOCKED_SUFFIXES = ["_misc", "_edu"];
+const PHARE = new Set(["iris-client"]);
 
 const GH_HEADERS = {
   Accept: "application/vnd.github+json",
@@ -106,6 +107,7 @@ const withReadmes = await Promise.all(
 );
 
 // --- Build records ---
+const phare = [];
 const core = [];
 const legacy = [];
 
@@ -123,17 +125,20 @@ for (const { r, readme } of withReadmes) {
   };
 
   if (!readme) continue; // skip projects with no documentation
-  if (r.name.endsWith("_core")) core.push(project);
-  else if (r.name.endsWith("_legacy")) legacy.push(project);
+  if (r.name.endsWith("_legacy")) legacy.push(project);
+  else if (r.name.endsWith("_core")) {
+    if (PHARE.has(project.slug)) phare.push(project);
+    else core.push(project);
+  }
 }
 
 // --- Write JSON (without readme to keep it light) ---
 mkdirSync(dirname(DATA_OUT), { recursive: true });
-const dataOut = { core, legacy };
-for (const list of [dataOut.core, dataOut.legacy])
+const dataOut = { phare, core, legacy };
+for (const list of [dataOut.phare, dataOut.core, dataOut.legacy])
   for (const p of list) delete p.readme;
 writeFileSync(DATA_OUT, JSON.stringify(dataOut, null, 2));
-console.log(`[fetch-github-repos] ${core.length} core, ${legacy.length} legacy → docs/data/github-repos.json`);
+console.log(`[fetch-github-repos] ${phare.length} phare, ${core.length} core, ${legacy.length} legacy → docs/data/github-repos.json`);
 
 // --- Generate docs/projects/<slug>/index.md ---
 // Clean only the files this script generates. Manually-added docs (extra .md
@@ -150,7 +155,7 @@ for (const entry of readdirSync(PROJECTS_DIR)) {
   }
 }
 
-const all = [...core, ...legacy];
+const all = [...phare, ...core, ...legacy];
 // Restore readme before generating pages
 const readmeMap = Object.fromEntries(withReadmes.map(({ r, readme }) => [toSlug(r.name), readme]));
 
