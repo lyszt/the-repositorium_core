@@ -35,13 +35,9 @@ Ryujinni posted a thread titled **"Lord Voice Test!"** in the News board (August
 
 The clearest surviving record of the game's visual development is its main menu, captured a year apart. The build evolved substantially between 2015 and 2016 — including a working title change to **"Zero"**.
 
-### 2015 — the early menu
-
 ![Blade Zenon main menu in 2015: a blue-lit night forest with Login, Options, Quit, and Credits options.](/bladezenon/menu2015.png)
 
 The 2015 menu sits in a dark, blue-lit forest at night. The options — **Login**, **Options**, **Quit**, **Credits** — reflect the project's framing as an online, account-based game tied to the ProBoards community.
-
-### 2016 — rebuilt as "Zero"
 
 ![Blade Zenon main menu in 2016, retitled "Zero", shown in the Unity editor: a daylit forest path with New Game, Options, Load Game, and Quit.](/bladezenon/zero2016.png)
 
