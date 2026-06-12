@@ -3,12 +3,12 @@
     {
       "slug": "eris-client",
       "name": "Eris Client",
-      "desc": "Eris is a systems-level utility built in C for project management. It abstracts shell and implements a macro execution engine.",
-      "url": "https://github.com/lyszt/eris-client_core",
-      "homepage": "",
+      "desc": " A C-based CLI that wraps your git workflow in simple commands — guided Conventional Commits, one-shot commit and push, branching,  rebasing, and replayable project macros.",
+      "url": "https://github.com/lyszt/eris-client_phare",
+      "homepage": "https://repositorium.joaoluisalmeidasantos.com/projects/eris-client/",
       "lang": "C",
       "stars": 2,
-      "updatedAt": "2026-05-06T19:34:28Z"
+      "updatedAt": "2026-06-12T18:39:49Z"
     }
   ],
   "core": [
@@ -124,16 +124,6 @@
     }
   ],
   "legacy": [
-    {
-      "slug": "blade-zenon",
-      "name": "Blade Zenon",
-      "desc": "A fantasy game and online community built by Ryujinni at age 12 under Studio Lygon X. Gathered 181 members on ProBoards between 2015 and 2017.",
-      "url": "",
-      "homepage": "https://bladezenon.boards.net/",
-      "lang": "Community",
-      "stars": 0,
-      "updatedAt": "2017-05-20T00:00:00Z"
-    },
     {
       "slug": "providentia-type-d-legacy",
       "name": "Providentia Type D",

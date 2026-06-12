@@ -10,7 +10,6 @@ const PROJECTS_DIR = resolve(ROOT, "docs/projects");
 
 const BLOCKED = new Set(["lyszt", "lyszt.github.io", "the-repositorium_core"]);
 const BLOCKED_SUFFIXES = ["_misc", "_edu"];
-const PHARE = new Set(["iris-client"]);
 
 const GH_HEADERS = {
   Accept: "application/vnd.github+json",
@@ -21,14 +20,14 @@ const GH_HEADERS = {
 
 function formatName(repoName) {
   return repoName
-    .replace(/_core$|_edu$|_legacy$/, "")
+    .replace(/_core$|_phare$|_edu$|_legacy$/, "")
     .replace(/[_-]/g, " ")
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 function toSlug(repoName) {
   return repoName
-    .replace(/_core$|_edu$|_misc$/, "")
+    .replace(/_core$|_phare$|_edu$|_misc$/, "")
     .replace(/_/g, "-")
     .toLowerCase();
 }
@@ -94,7 +93,7 @@ const eligible = allRepos.filter(
     !r.fork &&
     !BLOCKED.has(r.name) &&
     !BLOCKED_SUFFIXES.some((s) => r.name.endsWith(s)) &&
-    (r.name.endsWith("_core") || r.name.endsWith("_legacy"))
+    (r.name.endsWith("_core") || r.name.endsWith("_legacy") || r.name.endsWith("_phare"))
 );
 
 console.log(`[fetch-github-repos] Fetching READMEs for ${eligible.length} repos…`);
@@ -125,11 +124,9 @@ for (const { r, readme } of withReadmes) {
   };
 
   if (!readme) continue; // skip projects with no documentation
-  if (r.name.endsWith("_legacy")) legacy.push(project);
-  else if (r.name.endsWith("_core")) {
-    if (PHARE.has(project.slug)) phare.push(project);
-    else core.push(project);
-  }
+  if (r.name.endsWith("_phare")) phare.push(project);
+  else if (r.name.endsWith("_legacy")) legacy.push(project);
+  else core.push(project);
 }
 
 // --- Write JSON (without readme to keep it light) ---

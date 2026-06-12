@@ -2,7 +2,7 @@
 title: "README"
 ---
 
-( god, who programmed .eris to not be able to be commited? )
+( god, who programmed .iris to not be able to be commited? )
 
 
 A text-based RPG written in RISC-V 32-bit assembly, simulated via QEMU.

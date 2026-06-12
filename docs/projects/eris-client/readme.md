@@ -98,6 +98,6 @@ Optional: SWI-Prolog (`libswipl-dev`) for the Prolog router — falls back to a 
 
 ## Docs
 
-- [User guide](https://github.com/lyszt/eris-client_core/blob/master/docs/user-guide.md)
-- [Architecture](https://github.com/lyszt/eris-client_core/blob/master/docs/architecture.md)
-- [Contributing](https://github.com/lyszt/eris-client_core/blob/master/docs/contributing.md)
+- [User guide](https://github.com/lyszt/eris-client_phare/blob/master/docs/user-guide.md)
+- [Architecture](https://github.com/lyszt/eris-client_phare/blob/master/docs/architecture.md)
+- [Contributing](https://github.com/lyszt/eris-client_phare/blob/master/docs/contributing.md)
