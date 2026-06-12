@@ -45,6 +45,7 @@ export default defineConfig({
       { text: 'Projects', link: '/projects/', activeMatch: '/projects/' },
       { text: 'RISC-V', link: '/risc-v/', activeMatch: '/risc-v/' },
       { text: 'Tesserae Venus', link: '/tesserae-venus/', activeMatch: '/tesserae-venus/' },
+      { text: 'LYSZT', link: 'https://joaoluisalmeidasantos.com' },
     ],
     socialLinks: [
       {
