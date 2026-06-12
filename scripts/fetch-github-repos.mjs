@@ -1,4 +1,4 @@
-import { writeFileSync, mkdirSync, rmSync, readdirSync, statSync, existsSync } from "fs";
+import { writeFileSync, readFileSync, mkdirSync, rmSync, readdirSync, statSync, existsSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import { generateProjectPage, stripLeadingH1 } from "./lib/project-page.mjs";
@@ -136,11 +136,18 @@ writeFileSync(DATA_OUT, JSON.stringify(dataOut, null, 2));
 console.log(`[fetch-github-repos] ${core.length} core, ${legacy.length} legacy → docs/data/github-repos.json`);
 
 // --- Generate docs/projects/<slug>/index.md ---
-// Only wipe directories that were previously auto-generated (have .generated marker)
+// Clean only the files this script generates. Manually-added docs (extra .md
+// pages and the optional _extra.json sidebar manifest) living in a .generated
+// project dir are preserved across regeneration.
+const GENERATED_FILES = ["index.md", "readme.md"];
 for (const entry of readdirSync(PROJECTS_DIR)) {
   const full = resolve(PROJECTS_DIR, entry);
-  if (statSync(full).isDirectory() && existsSync(resolve(full, ".generated")))
-    rmSync(full, { recursive: true });
+  if (statSync(full).isDirectory() && existsSync(resolve(full, ".generated"))) {
+    for (const f of GENERATED_FILES) {
+      const fp = resolve(full, f);
+      if (existsSync(fp)) rmSync(fp);
+    }
+  }
 }
 
 const all = [...core, ...legacy];
@@ -167,6 +174,18 @@ for (const project of all) {
       `---\ntitle: "README"\n---\n\n${stripLeadingH1(readme)}`
     );
     sidebarItems.push({ text: "README", link: `/projects/${project.slug}/readme` });
+  }
+
+  // Append manually-curated pages preserved across regen. A project may ship a
+  // docs/projects/<slug>/_extra.json: [{ "text": "Guide", "link": "/projects/<slug>/guide" }]
+  const extraPath = resolve(dir, "_extra.json");
+  if (existsSync(extraPath)) {
+    try {
+      const extra = JSON.parse(readFileSync(extraPath, "utf8"));
+      if (Array.isArray(extra)) sidebarItems.push(...extra);
+    } catch (e) {
+      console.warn(`[fetch-github-repos] Ignoring bad _extra.json for ${project.slug}: ${e.message}`);
+    }
   }
 
   sidebar[`/projects/${project.slug}/`] = sidebarItems;

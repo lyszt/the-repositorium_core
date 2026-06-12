@@ -1,0 +1,11 @@
+[
+  { "text": "Introduction", "link": "/projects/iris-client/introduction" },
+  { "text": "iris init", "link": "/projects/iris-client/init" },
+  { "text": "iris commit", "link": "/projects/iris-client/commit" },
+  { "text": "iris branch", "link": "/projects/iris-client/branch" },
+  { "text": "iris rebase", "link": "/projects/iris-client/rebase" },
+  { "text": "iris ignore", "link": "/projects/iris-client/ignore" },
+  { "text": "iris alias / run", "link": "/projects/iris-client/macros" },
+  { "text": "Command chaining", "link": "/projects/iris-client/chaining" },
+  { "text": "Utilities", "link": "/projects/iris-client/utilities" }
+]
