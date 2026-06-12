@@ -7,7 +7,7 @@ description: "A RISC-V assembly simulator and learning environment built into Te
 
 Tesserae Venus is a **RISC-V assembly simulator** built directly into the [Tesserae](https://github.com/lyszt/lyszt_tesserae_core) web platform. It provides a complete in-browser environment for writing, running, and stepping through RISC-V assembly programs — no installation required.
 
-The name is a reference to [Venus](https://github.com/kvakil/venus), the original educational RISC-V simulator by Keyhan Vakil. Tesserae Venus reimplements the engine in modern JavaScript (with a WASM core for performance-critical paths) and wraps it in a redesigned IDE.
+The name is a reference to [Venus](https://github.com/kvakil/venus), the original educational RISC-V simulator by Keyhan Vakil. Tesserae Venus is inspired by Venus, wrapped in a redesigned IDE.
 
 ## What it implements
 
@@ -16,7 +16,6 @@ Tesserae Venus runs **RV32IM** — the 32-bit base integer instruction set plus 
 ## Contents
 
 - [Using the simulator](/tesserae-venus/using-the-simulator) — the UI, panels, keyboard shortcuts, file management
-- [Engine architecture](/tesserae-venus/engine) — how the assembler, CPU, and WASM core work
 
 ## RISC-V guide
 

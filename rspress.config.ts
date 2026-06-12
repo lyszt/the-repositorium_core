@@ -38,7 +38,6 @@ export default defineConfig({
       '/tesserae-venus/': [
         { text: 'Tesserae Venus', link: '/tesserae-venus/' },
         { text: 'Using the simulator', link: '/tesserae-venus/using-the-simulator' },
-        { text: 'Engine architecture', link: '/tesserae-venus/engine' },
       ],
     },
     nav: [
