@@ -15,7 +15,7 @@ At its peak, Blade Zenon gathered:
 | Total posts | 1,148 |
 | Total threads | 155 |
 
-The user specified the community reached roughly **100 members** at its height of active engagement — the remaining registrations likely came from later joiners or passive accounts.
+The community reached roughly **100 members** at its height of active engagement — the remaining registrations likely came from later joiners, bots or passive accounts.
 
 ## Staff
 
