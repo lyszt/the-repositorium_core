@@ -1,6 +1,7 @@
 import * as path from 'node:path';
 import { existsSync, readFileSync } from 'node:fs';
 import { defineConfig } from '@rspress/core';
+import { pluginSitemap } from '@rspress/plugin-sitemap';
 import remarkGithubVideo from './theme/lib/remark-github-video';
 
 const sidebarPath = path.join(__dirname, 'docs/data/sidebar.json');
@@ -10,6 +11,11 @@ const sidebar = existsSync(sidebarPath)
 
 export default defineConfig({
   root: path.join(__dirname, 'docs'),
+  plugins: [
+    pluginSitemap({
+      siteUrl: 'https://repositorium.joaoluisalmeidasantos.com',
+    }),
+  ],
   title: 'The Repositorium - Documentation for LYSZT Projects',
   description: 'Technical documentation and dev logs for projects built under LYSZT.',
   icon: '/favicon.ico',
