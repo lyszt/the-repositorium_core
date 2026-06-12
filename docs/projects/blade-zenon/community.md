@@ -42,6 +42,16 @@ The moderation team at the time of peak activity:
 - **OfficialByraine** — Joined in May 2017, one of the last recorded arrivals.
 - **Cosinus** — Posted "Sooo... What happened?" in December 2016 during the silence.
 
+## Staff Friction
+
+The moderation team was not without internal tension. **BigeCZ** posted **"My opinnion about ower staff team"** (14 replies, 678 views) — one of the most-engaged threads on the forum — airing public grievances about how the staff was functioning. The thread's high reply count relative to the forum's typical activity suggests it struck a nerve.
+
+**Lady Nanami** posted **"Parental Guidance"** (17 replies, 809 views), which addressed community conduct — likely in response to behavior or content that the moderation team had to manage. The thread's engagement puts it among the top five most-replied discussions on the entire forum.
+
+**"Pre-set Names/Name Approval"**, also by Lady Nanami (7 replies, 400 views), indicated the staff was attempting to implement structured controls over how players would present themselves in-game before release — an administrative layer that reflected both the community's growth and the friction of managing it.
+
+These three threads, all authored by staff members, collectively suggest that a meaningful portion of the forum's energy in mid-2015 was directed inward — toward managing the team itself rather than the game.
+
 ## Community Tenor
 
 The forum had a noticeably young, close-knit feel. Discussions mixed game development ideas with personal feelings — members posted openly about leaving, apologizing for absences, and hoping for revival. The **General Discussion** board accumulated 11 threads and 104 posts, almost entirely composed of introspective community check-ins rather than game discussion.

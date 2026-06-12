@@ -23,11 +23,7 @@ Ryujinni introduced a formal rule on **August 7, 2015**: members could only belo
 - **Rookies**
 - **Recruits**
 
-Initial confirmed members included Sȶar, Aʞasa, and BigeCZ. The guild emphasized measured conflict — when the Chaos guild proposed "endless wars," Aʞasa responded:
-
-> *"Endless wars are not our type...what we ask is to make treaties sometimes."*
-
-The Chaos guild accepted this boundary and both parties agreed constant war would be burdensome.
+Initial confirmed members included Sȶar, Aʞasa, and BigeCZ. The guild emphasized measured conflict. When the Chaos guild proposed endless wars, Ðivided pushed back — preferring occasional treaties over permanent hostility. The Chaos guild accepted this and both parties agreed constant war would be burdensome.
 
 ---
 
@@ -52,11 +48,7 @@ Early members included **Andrew Sunshadow** and **Strawberri**. A previous threa
 **Founded by:** Fain  
 **Type:** Combat (Warrior / Battlemage / Melee / Assassin)
 
-Chaos was openly combat-focused, positioning itself as conflict-driven from the start. Fain's founding post declared:
-
-> *"Chaos will be a Warrior/Battlemage/Melee/Assassin based guild."*
-
-The guild promised to outlast rivals. Its application process asked prospective members about:
+Chaos was openly combat-focused, positioning itself as conflict-driven from the start — a Warrior, Battlemage, Melee, and Assassin guild by design. The guild promised to outlast rivals. Its application process asked prospective members about:
 
 - Online frequency
 - Guild devotion
