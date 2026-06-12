@@ -17,9 +17,28 @@ export default defineConfig({
     remarkPlugins: [remarkGithubVideo],
   },
   themeConfig: {
-    sidebar,
+    sidebar: {
+      ...sidebar,
+      '/risc-v/': [
+        { text: 'RISC-V', link: '/risc-v/' },
+        { text: 'Getting started', link: '/risc-v/getting-started' },
+        { text: 'Arithmetic', link: '/risc-v/arithmetic' },
+        { text: 'Input & output', link: '/risc-v/io' },
+        { text: 'Decisions & loops', link: '/risc-v/branches' },
+        { text: 'Functions & the stack', link: '/risc-v/functions' },
+        { text: 'Memory', link: '/risc-v/memory' },
+        { text: 'Instruction reference', link: '/risc-v/instruction-reference' },
+      ],
+      '/tesserae-venus/': [
+        { text: 'Tesserae Venus', link: '/tesserae-venus/' },
+        { text: 'Using the simulator', link: '/tesserae-venus/using-the-simulator' },
+        { text: 'Engine architecture', link: '/tesserae-venus/engine' },
+      ],
+    },
     nav: [
       { text: 'Projects', link: '/projects/', activeMatch: '/projects/' },
+      { text: 'RISC-V', link: '/risc-v/', activeMatch: '/risc-v/' },
+      { text: 'Tesserae Venus', link: '/tesserae-venus/', activeMatch: '/tesserae-venus/' },
     ],
     socialLinks: [
       {

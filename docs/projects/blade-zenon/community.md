@@ -1,0 +1,64 @@
+---
+title: "Chapter III: The Community"
+---
+
+# Chapter III — The Community
+
+## Scale
+
+At its peak, Blade Zenon gathered:
+
+| Metric | Count |
+|---|---|
+| Registered members | 181 |
+| Peak concurrent users | 61 |
+| Total posts | 1,148 |
+| Total threads | 155 |
+
+The user specified the community reached roughly **100 members** at its height of active engagement — the remaining registrations likely came from later joiners or passive accounts.
+
+## Staff
+
+The moderation team at the time of peak activity:
+
+| Username | Role |
+|---|---|
+| Ryujinni | Founder / Moderator |
+| BigeCZ | Moderator |
+| Darky (@darkwolves12) | Moderator |
+| Lady Nanami (@ladynanami) | Moderator |
+| Sȶar (@star) | Moderator |
+| Aʞasa | Moderator |
+
+## Notable Members
+
+- **Hiruko Kagetane 蛭子影胤** — One of the most consistent long-term members. Described themselves as "arguably the last one who remains," checking back "every couple months" even years after activity died.
+- **Fighter / Fighter6968** — Co-leader of the Chaos guild.
+- **Andrew Sunshadow** — Active in guild threads.
+- **Fain (@fireblaster)** — Founded the Chaos guild.
+- **Chew** — Active community voice, started the "people leaving" discussion.
+- **♥ Starlight ♥** — Co-led Ðivided guild alongside Sȶar and Aʞasa.
+- **Batman** — Joined Ðivided guild.
+- **OfficialByraine** — Joined in May 2017, one of the last recorded arrivals.
+- **Cosinus** — Posted "Sooo... What happened?" in December 2016 during the silence.
+
+## Community Tenor
+
+The forum had a noticeably young, close-knit feel. Discussions mixed game development ideas with personal feelings — members posted openly about leaving, apologizing for absences, and hoping for revival. The **General Discussion** board accumulated 11 threads and 104 posts, almost entirely composed of introspective community check-ins rather than game discussion.
+
+Significant discussion threads:
+
+| Thread | Author | Replies | Views |
+|---|---|---|---|
+| My opinion about the game coming out | Darky | 17 | 1,047 |
+| Parental Guidance | Lady Nanami | 17 | 809 |
+| What's going on? | Oкαмι-Rуυυкσ | 5 | 606 |
+| people leaving. | Chew | 13 | 481 |
+| Blade Zenon MV Sign-Up *Song Poll* | Aʞasa | 12 | 753 |
+| Pre-set Names/Name Approval | Lady Nanami | 7 | 400 |
+| Truth About The Release Date | Lady Nanami | 4 | 437 |
+| Moving on... | alyssarr9fox | 3 | 477 |
+| My opinnion about ower staff team | BigeCZ | 14 | 678 |
+| I'm Sorry | ♥ Starlight ♥ | 0 | 349 |
+| Sooo... What happened? | Cosinus | 0 | 748 |
+| Lets revive this | Darky | 7 | 3,000 |
