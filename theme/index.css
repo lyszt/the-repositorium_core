@@ -369,6 +369,64 @@ body:not(.notTopArrived) .rp-nav {
   animation: generic_fade 0.2s ease-out both;
 }
 
+/* ── Sponsor card ───────────────────────────────────────────────────── */
+.rp-sponsor-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.rp-sponsor-card__body {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--muted-foreground);
+}
+
+.rp-sponsor-card__body svg {
+  flex-shrink: 0;
+  color: var(--foreground);
+}
+
+.rp-sponsor-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.rp-sponsor-card__text strong {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.rp-sponsor-card__action {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--background);
+  background: var(--foreground);
+  text-decoration: none !important;
+  transition: background 0.2s ease;
+}
+
+.rp-sponsor-card__action:hover {
+  background: var(--foreground-hover);
+}
+
+.rp-sponsor-card__action span {
+  font-size: 0.85em;
+}
+
 /* ── Reduced motion ──────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .lux-rise,
