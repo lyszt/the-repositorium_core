@@ -7,6 +7,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const DATA_OUT = resolve(ROOT, "docs/data/github-repos.json");
 const PROJECTS_DIR = resolve(ROOT, "docs/projects");
+// Hand-curated, non-GitHub projects (e.g. archived forum communities). These
+// have no repo to fetch, so they live in a manifest and are merged into the
+// generated data/sidebar. Their docs/projects/<slug>/ pages are hand-written
+// and never regenerated or deleted by this script.
+const MANUAL_PROJECTS = resolve(ROOT, "docs/data/manual-projects.json");
 
 const BLOCKED = new Set(["lyszt", "lyszt.github.io", "the-repositorium_core"]);
 const BLOCKED_SUFFIXES = ["_misc", "_edu"];
@@ -129,6 +134,26 @@ for (const { r, readme } of withReadmes) {
   else core.push(project);
 }
 
+// --- Merge hand-curated, non-GitHub projects ---
+// Manifest shape: { core?: [...], legacy?: [...], phare?: [...] } where each
+// entry is a project object plus an optional `pages` array used to build its
+// sidebar. Manual entries are prepended so they lead their category.
+const manualSidebars = {}; // "/projects/<slug>/" -> sidebar items
+if (existsSync(MANUAL_PROJECTS)) {
+  const manual = JSON.parse(readFileSync(MANUAL_PROJECTS, "utf8"));
+  const buckets = { phare, core, legacy };
+  for (const [category, list] of Object.entries(manual)) {
+    if (!buckets[category]) continue;
+    for (const { pages, ...project } of list) {
+      buckets[category].unshift(project);
+      manualSidebars[`/projects/${project.slug}/`] = [
+        { text: "← Projects", link: "/projects/" },
+        ...(pages ?? [{ text: "Overview", link: `/projects/${project.slug}/` }]),
+      ];
+    }
+  }
+}
+
 // --- Write JSON (without readme to keep it light) ---
 mkdirSync(dirname(DATA_OUT), { recursive: true });
 const dataOut = { phare, core, legacy };
@@ -152,11 +177,13 @@ for (const entry of readdirSync(PROJECTS_DIR)) {
   }
 }
 
-const all = [...phare, ...core, ...legacy];
+// Manual projects ship hand-written pages — never regenerate or mark them.
+const manualSlugs = new Set(Object.keys(manualSidebars).map((k) => k.split("/")[2]));
+const all = [...phare, ...core, ...legacy].filter((p) => !manualSlugs.has(p.slug));
 // Restore readme before generating pages
 const readmeMap = Object.fromEntries(withReadmes.map(({ r, readme }) => [toSlug(r.name), readme]));
 
-const sidebar = {};
+const sidebar = { ...manualSidebars };
 
 for (const project of all) {
   const dir = resolve(PROJECTS_DIR, project.slug);

@@ -1,6 +1,6 @@
 ---
 name: Rspress project categories in ProjectsList
-description: Add a new project category section to the projects index page, including JSON data, destructuring, and custom visual treatment
+description: Add a new project category section to the projects index page, including fetch script logic, JSON data, component rendering, and visual treatment
 source: auto-skill
 extracted_at: '2026-06-12T18:49:59.824Z'
 ---
@@ -11,9 +11,48 @@ extracted_at: '2026-06-12T18:49:59.824Z'
 
 The projects index (`/projects/`) has multiple categorized sections (e.g., "Core", "Legacy") rendered from `docs/data/github-repos.json`. You need to add a new category (e.g., "Phare" for flagship projects) that appears above existing sections, with a different visual treatment (featured card vs. table-of-contents entries).
 
-This is a three-part change: data, component, and (optionally) sidebar.
+This is a four-part change: fetch script, data, component, and sidebar.
 
 ## Step-by-step
+
+### 0. Update `scripts/fetch-github-repos.mjs`
+
+The fetch script determines categories automatically by repo name suffix — **not via a hardcoded set**. Adding a new category requires changes in three places:
+
+**a) Add the suffix to `formatName` and `toSlug`** so the suffix is stripped when generating display names and slugs:
+
+```js
+function formatName(repoName) {
+  return repoName
+    .replace(/_core$|_phare$|_edu$|_legacy$/, "")
+    .replace(/[_-]/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function toSlug(repoName) {
+  return repoName
+    .replace(/_core$|_phare$|_edu$|_misc$/, "")
+    .replace(/_/g, "-")
+    .toLowerCase();
+}
+```
+
+**b) Add the suffix to the eligibility filter:**
+
+```js
+(r.name.endsWith("_core") || r.name.endsWith("_legacy") || r.name.endsWith("_phare"))
+```
+
+**c) Add a suffix-based routing branch in the categorization logic.** Remove any hardcoded Set lookup:
+
+```js
+if (!readme) continue;
+if (r.name.endsWith("_phare")) phare.push(project);
+else if (r.name.endsWith("_legacy")) legacy.push(project);
+else core.push(project);
+```
+
+The key insight: **the repo suffix (`_phare`, `_core`, `_legacy`) determines the category automatically** — no manual slug list needed. On GitHub, you name the repo `eris-client_phare` and the script routes it correctly.
 
 ### 1. Add the category key to `docs/data/github-repos.json`
 

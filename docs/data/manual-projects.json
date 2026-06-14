@@ -1,0 +1,23 @@
+{
+  "legacy": [
+    {
+      "slug": "blade-zenon",
+      "name": "Blade Zenon",
+      "desc": "A fantasy game and online community built by Ryujinni at age 12 under Studio Lygon X. Gathered 181 members on ProBoards between 2015 and 2017.",
+      "url": "",
+      "homepage": "https://bladezenon.boards.net/",
+      "lang": "Community",
+      "stars": 0,
+      "updatedAt": "2017-05-20T00:00:00Z",
+      "pages": [
+        { "text": "Overview", "link": "/projects/blade-zenon/" },
+        { "text": "I — Origins", "link": "/projects/blade-zenon/origins" },
+        { "text": "II — The World", "link": "/projects/blade-zenon/the-world" },
+        { "text": "III — Community", "link": "/projects/blade-zenon/community" },
+        { "text": "IV — The Forum", "link": "/projects/blade-zenon/forum" },
+        { "text": "V — Guilds", "link": "/projects/blade-zenon/guilds" },
+        { "text": "VI — Decline", "link": "/projects/blade-zenon/decline" }
+      ]
+    }
+  ]
+}

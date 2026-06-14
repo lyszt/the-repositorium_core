@@ -1,8 +1,38 @@
+import { useEffect } from 'react';
 import { useLocation } from '@rspress/core/runtime';
 import { Layout as OriginalLayout } from '@rspress/core/theme-original';
 import type { LayoutProps } from '@rspress/core/theme';
 
 const SPONSOR_GH = 'https://github.com/sponsors/lyszt';
+
+function GoogleTranslate() {
+  useEffect(() => {
+    // Inject Google Translate script once
+    if (document.getElementById('gt-script')) return;
+    const script = document.createElement('script');
+    script.id = 'gt-script';
+    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.async = true;
+    document.body.appendChild(script);
+    (window as any).googleTranslateElementInit = () => {
+      new (window as any).google.translate.TranslateElement(
+        {
+          pageLanguage: 'en',
+          includedLanguages: 'en,pt,es,fr,de,it,ja,ko,zh-CN,ru,ar',
+          layout: (window as any).google.translate.TranslateElement.InlineLayout.SIMPLE,
+          autoDisplay: false,
+        },
+        'google_translate_element'
+      );
+    };
+  }, []);
+
+  return (
+    <div className="rp-translate-float">
+      <div id="google_translate_element" />
+    </div>
+  );
+}
 
 function SponsorCard() {
   return (
@@ -33,11 +63,7 @@ export default function Layout(props: LayoutProps) {
   const { pathname } = useLocation();
   const isProjectPage = pathname.startsWith('/projects/');
 
-  if (!isProjectPage) {
-    return <OriginalLayout {...props} />;
-  }
-
-  return (
+  const inner = isProjectPage ? (
     <OriginalLayout
       {...props}
       afterDocContent={
@@ -47,5 +73,14 @@ export default function Layout(props: LayoutProps) {
         </>
       }
     />
+  ) : (
+    <OriginalLayout {...props} />
+  );
+
+  return (
+    <>
+      {inner}
+      <GoogleTranslate />
+    </>
   );
 }

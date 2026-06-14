@@ -369,6 +369,55 @@ body:not(.notTopArrived) .rp-nav {
   animation: generic_fade 0.2s ease-out both;
 }
 
+/* ── Google Translate float ─────────────────────────────────────────── */
+.rp-translate-float {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 999;
+}
+
+.rp-translate-float .goog-te-gadget {
+  font-family: var(--font-sans) !important;
+  font-size: 0 !important;
+  color: transparent !important;
+}
+
+.rp-translate-float .goog-te-gadget .goog-te-combo {
+  font-size: 0.8125rem;
+  color: var(--foreground);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1rem;
+  box-shadow: 0 2px 8px oklch(0 0 0 / 8%);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  min-width: 160px;
+}
+
+.rp-translate-float .goog-te-gadget .goog-te-combo:hover {
+  border-color: var(--foreground);
+  box-shadow: 0 4px 12px oklch(0 0 0 / 12%);
+}
+
+/* Hide Google branding text */
+.rp-translate-float .goog-te-gadget span {
+  display: none !important;
+}
+
+/* Suppress Google's auto-scroll iframe banner */
+body > .skiptranslate {
+  display: none !important;
+}
+
 /* ── Sponsor card ───────────────────────────────────────────────────── */
 .rp-sponsor-card {
   display: flex;

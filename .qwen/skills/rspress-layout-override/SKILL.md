@@ -208,3 +208,15 @@ Check that:
 - **Remark/rehype plugin** — transforms the markdown AST; good for injecting into the document body itself, but harder to match site design tokens
 - **CSS-only** — limited to decorative content; cannot render interactive elements like buttons
 - **Per-page markdown includes** — requires editing every file; not DRY
+- **Sibling rendering for fixed-position elements** — if the content is `position: fixed` (e.g., a floating widget like Google Translate), render it as a sibling of the layout rather than using a slot. Fixed-position elements are taken out of the document flow, so they don't need to be inside the layout structure:
+
+```tsx
+return (
+  <>
+    <OriginalLayout {...props} />
+    <GoogleTranslate />  {/* fixed-position, renders outside content flow */}
+  </>
+);
+```
+
+This pattern is used for floating widgets (translate, cookie consent, feedback buttons) that should appear on every page regardless of layout type (doc, home, 404).
