@@ -5,7 +5,7 @@
       "name": "Eris Client",
       "desc": " A C-based CLI that wraps your git workflow in simple commands — guided Conventional Commits, one-shot commit and push, branching,  rebasing, and replayable project macros.",
       "url": "https://github.com/lyszt/eris-client_phare",
-      "homepage": "https://repositorium.joaoluisalmeidasantos.com/projects/eris-client/",
+      "homepage": "",
       "lang": "C",
       "stars": 2,
       "updatedAt": "2026-06-12T20:26:27Z"
@@ -149,7 +149,7 @@
       "name": "Scarlett Gateway",
       "desc": "",
       "url": "https://github.com/lyszt/scarlett-gateway_legacy",
-      "homepage": "https://lystree.000webhostapp.com/",
+      "homepage": "",
       "lang": "PHP",
       "stars": 0,
       "updatedAt": "2026-01-31T17:35:53Z"

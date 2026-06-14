@@ -15,6 +15,9 @@ const MANUAL_PROJECTS = resolve(ROOT, "docs/data/manual-projects.json");
 
 const BLOCKED = new Set(["lyszt", "lyszt.github.io", "the-repositorium_core"]);
 const BLOCKED_SUFFIXES = ["_misc", "_edu"];
+// Repo homepages that should not appear as project "Website" links.
+// Add a slug here when the GitHub repo homepage field is wrong/dead/self-referential.
+const BLOCKED_HOMEPAGES = new Set(["scarlett-gateway-legacy"]);
 
 const GH_HEADERS = {
   Accept: "application/vnd.github+json",
@@ -121,7 +124,13 @@ for (const { r, readme } of withReadmes) {
     name: formatName(r.name),
     desc: r.description || "",
     url: r.svn_url,
-    homepage: r.homepage || "",
+    homepage: (() => {
+      const slug = toSlug(r.name);
+      const h = r.homepage || "";
+      if (BLOCKED_HOMEPAGES.has(slug)) return "";
+      if (h.includes("repositorium.joaoluisalmeidasantos.com")) return "";
+      return h;
+    })(),
     lang: r.language || "",
     stars: r.stargazers_count,
     updatedAt: r.updated_at,
